@@ -1,0 +1,31 @@
+#footer {position: relative;background-color: #8071b9;border-top: 5px solid rgba(0,0,0,.2);}
+#header:not(.sticky-header) #primary-menu > ul > li.menu-item-emphasis > a {background-color: #412da4;color:#ffffff;text-shadow: none;}
+#copyrights {      
+    background-color: #412da4;
+    color:#ffffff;
+    font-size: 14px;
+    line-height: 1.8;
+}
+#copyrights > .copys {
+    padding: 20px 0;       
+    background-color: #412da4;
+    color:#ffffff;
+    font-size: 14px;
+    line-height: 1.8;
+}
+#copyrights a{   
+color:#ffffff;
+font-size: 14px;
+line-height: 1.8;
+}
+.copys > .col-lg-6{float:left;}
+.footer-widgets-wrap p{color:#ffffff;}
+.widget_links h4{color: #ffffff;}
+.widget.widget_links.app_landing_widget_link li a{color: #ffffff;}
+.widget>.row>.col-lg-8>img{max-width:50%;margin-left:auto;margin-right:auto;}
+h2.titulos{color:#412da4;}
+p>strong{color:#412da4}
+.bg-info {
+    background-color: #412da4 !important;
+}
+.flip-card-inner { padding: 1.0rem!important;}
