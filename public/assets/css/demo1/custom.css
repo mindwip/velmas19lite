@@ -1,0 +1,104 @@
+.kt-aside__brand {background-color: #412DA4;}
+.kt-aside-menu {background-color: #222;}
+.kt-aside .kt-aside-menu {margin: 0;}
+.kt-aside-menu .kt-menu__nav > .kt-menu__item:not(.kt-menu__item--parent):not(.kt-menu__item--open):not(.kt-menu__item--here):not(.kt-menu__item--active):hover > .kt-menu__link {background-color: #412DA4;}
+.kt-aside-menu .kt-menu__nav > .kt-menu__item > .kt-menu__link .kt-menu__link-text {color: #fff;}
+.kt-aside-menu .kt-menu__nav > .kt-menu__item > .kt-menu__link .kt-menu__link-icon {color: #8071B9;}
+.kt-aside-menu .kt-menu__nav > .kt-menu__item > .kt-menu__link .kt-menu__link-icon svg g [fill] {transition: fill 0.3s ease;fill: #8071B9;}
+.kt-aside-menu .kt-menu__nav > .kt-menu__item:not(.kt-menu__item--parent):not(.kt-menu__item--open):not(.kt-menu__item--here):not(.kt-menu__item--active):hover > .kt-menu__link .kt-menu__link-icon {color: #8071B9;}
+.kt-aside-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--active > .kt-menu__link {background-color: #412DA4;}
+.kt-aside-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--active > .kt-menu__link .kt-menu__link-icon svg g [fill] {transition: fill 0.3s ease;fill: #8071B9;}
+.kt-aside-menu .kt-menu__nav > .kt-menu__item:not(.kt-menu__item--parent):not(.kt-menu__item--open):not(.kt-menu__item--here):not(.kt-menu__item--active):hover > .kt-menu__link .kt-menu__link-icon svg g [fill] {transition: fill 0.3s ease;fill: #8071B9;}
+.kt-aside__brand .kt-aside__brand-tools .kt-aside__brand-aside-toggler svg g [fill] {transition: fill 0.3s ease;fill: #fff;}
+.kt-aside-menu .kt-menu__nav > .kt-menu__section .kt-menu__section-text {color: white;font-size: 1.0rem;}
+.kt-badge.kt-badge--unified-success {color: #8071B9;background: #412DA4;}
+.btn-primary {color: #fff;background-color: #412DA4;border-color: #412DA4;color: #ffffff;}
+button#kt_header_mobile_toggler.kt-header-mobile__toggler{display:none;}
+.bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default {background-color: #8071B9;border-color: #e2e5ec;color: #fff;}
+.bootstrap-select .dropdown-menu.inner > li.selected > a .text, .bootstrap-select .dropdown-menu.inner > li:hover > a .text {color: #412DA4;font-weight: bold;}
+.bootstrap-select .dropdown-menu.inner > li.selected > a span.check-mark, .bootstrap-select .dropdown-menu.inner > li:hover > a span.check-mark {color: #412DA4;font-weight: bold;}
+.kt-widget.kt-widget--user-profile-3 .kt-widget__top .kt-widget__content .kt-widget__info .kt-widget__stats .kt-widget__item .kt-widget__date {font-weight: bold;}
+.kt-aside__brand {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 0 25px;
+    height: 120px;
+}
+.row { display: flex;flex-wrap: wrap;margin-right: auto;margin-left: auto;}
+.kt-subheader .kt-subheader__main { padding: 0.25rem 20px;}
+.kt-portlet.kt-portlet--solid-users {
+    background: #412DA4;
+    color: #fff;
+}
+.kt-portlet.kt-portlet--solid-forms {
+    background: #8071B9;
+    color: #fff;
+}
+.kt-portlet.kt-portlet--solid-creaforms {
+    background: #222222;
+    color: #fff;
+}
+.kt-portlet.kt-portlet--solid-pagos {
+    background: #666666;
+    color: #fff;
+}
+.kt-portlet .kt-portlet__head .kt-portlet__head-label .kt-portlet__head-icon {color: #fff;}
+.kt-portlet .kt-portlet__head .kt-portlet__head-label .kt-portlet__head-title {color: #fff;}
+.btn-font-light {text-decoration: underline;}
+.kt-portlet .kt-portlet__head .kt-portlet__head-label .kt-portlet__head-icon {font-size: 2.3rem;}
+@media (max-width: 1024px) {
+.kt-header-mobile {
+    padding: 5px 15px;
+    height: auto;   
+}
+}
+button.btn.btn-primary.menu:hover{background-color:#8071B9;border-color:#8071B9;}
+.formbuilder {
+    height: 600px;
+  }
+  
+  .formcomponents {
+    width: 30%;
+  }
+  
+  .formarea {
+    width: 70%;
+  }
+  
+  .component-settings .nav-link {
+    font-size: 0.6em;
+  }
+  
+  .jsonviewer {
+    max-height: 600px;
+    overflow: scroll;
+  }
+  
+  .form-type-select {
+    display: inline-block;
+    width: 100px;
+    height: 28px;
+    vertical-align: top;
+  }
+  .kt-portlet .kt-portlet__head .kt-portlet__head-label .kt-portlet__head-title-pages {
+
+    color: #412DA4;
+
+}
+.kt-portlet .kt-portlet__head .kt-portlet__head-label .kt-portlet__head-icon-pages {
+
+  color: #412DA4;
+
+}
+
+.frm-inline{
+    display: inline-block;
+}
+
+select.form-control:not([size]):not([multiple]){
+    height: auto !important;
+}
+    
+  
