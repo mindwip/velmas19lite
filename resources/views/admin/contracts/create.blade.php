@@ -45,15 +45,14 @@
 							<div class="form-group form-group-last row" id="kt_repeater_1">
 								<label class="col-lg-2 col-form-label">Bloques:</label>
 								<div data-repeater-list="" class="col-lg-10">
-									<div data-repeater-item
-										class="form-group row align-items-center">
+									<div data-repeater-item class="form-group row align-items-center">
 										<div class="col-md-3">
 											<div class="kt-form__group--inline">
 												<div class="kt-form__label">
 													<label>Alias:</label>
 												</div>
 												<div class="kt-form__control">
-													<input name="text-input" type="text" class="form-control" placeholder="Enter full name">
+													<input name="block_item[1][alias]" type="text" class="form-control" placeholder="Enter full name">
 												</div>
 											</div>
 											<div class="d-md-none kt-margin-b-10"></div>
@@ -65,7 +64,7 @@
 													<label class="kt-label m-label--single">Posición:</label>
 												</div>
 												<div class="kt-form__control">
-													<input name="position" type="number" class="form-control" placeholder="Ej: 1">
+													<input name="block_item[1][position]" type="number" class="form-control" placeholder="Ej: 1">
 												</div>
 											</div>
 											<div class="d-md-none kt-margin-b-10"></div>
@@ -73,14 +72,14 @@
 										<div class="col-md-4">
 											<label for="exampleSelect1">Bloque Padre
 											</label>
-											<select name="father" class="form-control">
+											<select name="block_item[1][father]" class="form-control">
 												<option>No</option>
 												<option>Presentación</option>
 												<option>Cabecera</option>
 												<option>Pie</option>
 												<option>Clausulas</option>
 											</select>
-										</div>
+										</div> 
 
 										<div class="col-md-4">
 											<div style="margin-bottom: 6px;">&nbsp;</div>

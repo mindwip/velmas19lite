@@ -51,4 +51,9 @@
     <!-- end:: Content -->
 </div>
 
+@push('scripts')
+<script src="{{ asset('assets/vendors/custom/datatables/datatables.bundle.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/js/demo1/pages/crud/datatables/advanced/column-rendering.js') }}" type="text/javascript"></script>
+@endpush
+
 @endsection
