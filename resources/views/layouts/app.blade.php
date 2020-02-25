@@ -55,7 +55,7 @@
                         <a href="/" class="standard-logo" data-dark-logo="{!! asset('media/logos/logo-light.png') !!}">
                             <img src="{!! asset('media/logos/logo-light.png') !!}" alt="Canvas Logo">
                         </a>
-                        
+
                         <a href="/" class="retina-logo" data-dark-logo="{!! asset('media/logos/logo-light.png') !!}">
                             <img src="{!! asset('media/logos/logo-light.png') !!}" alt="Canvas Logo">
                         </a>
@@ -261,17 +261,16 @@
         </footer><!-- #footer end -->
     </div>
     <!-- #wrapper end -->
-    
+
     <!-- Go To Top
     ============================================= -->
     <div id="gotoTop" class="icon-angle-up"></div>
 
     <!-- External JavaScripts
     ============================================= -->
-    <!-- <script src="{{ asset('js/jquery.js') }}"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/core.js"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>
-    
+
     <!-- Footer Scripts
     ============================================= -->
     <script src="{{ asset('js/functions.js') }}"></script>
