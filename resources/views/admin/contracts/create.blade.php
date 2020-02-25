@@ -44,7 +44,7 @@
 						<div id="kt_repeater_1">
 							<div class="form-group form-group-last row" id="kt_repeater_1">
 								<label class="col-lg-2 col-form-label">Bloques:</label>
-								<div data-repeater-list="" class="col-lg-10">
+								<div data-repeater-list="block_item" class="col-lg-10">
 									<div data-repeater-item class="form-group row align-items-center">
 										<div class="col-md-3">
 											<div class="kt-form__group--inline">
@@ -57,7 +57,7 @@
 											</div>
 											<div class="d-md-none kt-margin-b-10"></div>
 										</div>
-										
+
 										<div class="col-md-1">
 											<div class="kt-form__group--inline">
 												<div class="kt-form__label">
@@ -79,7 +79,7 @@
 												<option>Pie</option>
 												<option>Clausulas</option>
 											</select>
-										</div> 
+										</div>
 
 										<div class="col-md-4">
 											<div style="margin-bottom: 6px;">&nbsp;</div>
@@ -104,7 +104,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="kt-separator kt-separator--border-dashed kt-separator--space-lg">
 				</div>
 				<div class="kt-portlet__foot">
