@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
-class HomeController extends Controller
-{
+//Models:
+use App\Contract;
+use App\ContractBlocks;
+use App\UserContracts;
+
+class HomeController extends Controller{
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
+    public function __construct(){
+        //$this->middleware('auth');
     }
 
     /**
@@ -21,8 +26,135 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        return view('home');
+    public function index(){
+        $contracts = Contract::where('state', 1)->get();
+
+        return view('home')->with(compact('contracts'));
+    }
+
+    /**
+     * Página estáticas.
+     */
+    public function condicionesUso(){
+        return view('web.terms-use');    
+    }
+    public function politicasPrivacidad(){
+        return view('web.privacy-policy');    
+    }
+    public function politicasCookies(){
+        return view('web.cookies-policy');    
+    }
+
+    /**
+     * Formulario detalle.
+     */
+    public function formulario($slug = false){
+        if(!$slug){
+            return redirect('/');
+        }
+
+        $contract = Contract::where('slug', $slug)->first();
+
+        if(!$contract){
+            return redirect('/');
+        }
+
+        $blocks = ContractBlocks::where('contract_id', $contract->id)->get();
+
+        return view('web.formulario')->with(compact('contract', 'blocks'));
+    }
+
+    /**
+     * Añadir al carrito:
+     */
+    public function addCarrito($slug = false){
+        if(!$slug){
+            return redirect('/');
+        }
+
+        $contract = Contract::where('slug', $slug)->first();
+
+        //Declaramos sesión:
+        if(!session('contracts')){
+            \Session::push('contracts', $contract->id);     
+        }    
+
+        //dd($contract, session('contracts'));
+
+        //Pasamos contrato a la sesión si no existe:
+        if(!in_array($contract->id, session('contracts'))){
+            \Session::push('contracts', $contract->id);    
+        }
+
+        return redirect()->route('carrito');
+    }
+
+    /**
+     * Carrito.
+     */
+    public function carrito(){
+        if(empty(session('contracts'))){
+            return redirect('/');  
+            exit;  
+        }
+
+        //Contratos del carrito:
+        $contracts = Contract::whereIn('id', session('contracts'))->get();
+        
+        return view('web.carrito')->with(compact('contracts'));
+    }
+
+    /**
+     * Eliminar contrato de carrito:
+     */
+    public function deleteContract($id = false){
+        if(!$id){
+            return redirect('/');
+            exit;
+        }   
+
+        $oldArr = session('contracts');
+        \Session::forget('contracts'); 
+        foreach($oldArr as $r){
+            if($r != $id){
+                \Session::push('contracts', $r);
+            }
+        }
+
+        return redirect()->route('carrito');
+    }
+
+    /**
+     * Checkout:
+     */
+    public function checkout(){
+        if(empty(session('contracts'))){
+            return redirect('/');  
+            exit;  
+        }
+
+        //Contratos del carrito:
+        $contracts = Contract::whereIn('id', session('contracts'))->get();
+        
+        return view('web.checkout')->with(compact('contracts'));    
+    }
+
+    /**
+     * Formulario de contacto.
+     */
+    public function contacta(){
+        return view('web.contact');    
+    }
+
+    /**
+     * Perfil de cliente.
+     */
+    public function cliente(){
+        $contracts = UserContracts::select('contracts.*')
+            ->join('contracts', 'user_contracts.contract_id', '=', 'contracts.id')
+            ->where('user_contracts.user_id', Auth::user()->id)
+            ->get();
+
+        return view('web.cliente')->with(compact('contracts'));    
     }
 }

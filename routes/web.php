@@ -11,13 +11,23 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('home');
-});
+}); */
 
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('formulario/{slug}', 'HomeController@formulario')->name('formulario');
+Route::get('contratar/{slug}', 'HomeController@addCarrito')->name('contratar');
+Route::get('carrito', 'HomeController@carrito')->name('carrito');
+Route::get('checkout', 'HomeController@checkout')->name('checkout');
+Route::get('delete-contract/{id}', 'HomeController@deleteContract')->name('delete-contract');
+Route::get('condiciones-uso', 'HomeController@condicionesUso')->name('condiciones-uso');
+Route::get('politicas-privacidad', 'HomeController@politicasPrivacidad')->name('politicas-privacidad');
+Route::get('politicas-cookies', 'HomeController@politicasCookies')->name('politicas-cookies');
+Route::get('contacta', 'HomeController@contacta')->name('contacta');
+Route::get('cliente', 'HomeController@cliente')->name('cliente');
 
 // LOGOUT:
 Route::get('logout', 'Auth\LoginController@logout', function (){
@@ -27,10 +37,10 @@ Route::get('logout', 'Auth\LoginController@logout', function (){
 // FRONTEND:
 
 
-// BACKEND:  auth, admin
-Route::middleware([])->prefix('admin')->namespace('Admin')->group(function(){
+// BACKEND:  middleware(['auth', 'admin'])->
+Route::prefix('admin')->namespace('Admin')->group(function(){
 	//Admin / Dashboard:
-	Route::get('/', 'AdminController@index')->name('admin');
+	Route::get('dashboard', 'AdminController@index')->name('admin');
 
 	//Contracts:
 	Route::get('contracts', 'ContractController@index')->name('contracts.index');

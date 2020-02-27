@@ -20,13 +20,19 @@ class ContractController extends Controller{
         //Validación save:
         if(isset($data['submit_save'])){
             return Validator::make($data, [
-                'name' => 'required|string|max:191',
+                'name' => 'required|string|max:255|unique:contracts,name,NULL,id,deleted_at,NULL',
+                'price' => 'numeric'
+            ],[
+                'name.unique' => 'El nombre de formulario ya existe'
             ]);
 
         //Validación update:
         }elseif(isset($data['submit_update'])){
             return Validator::make($data, [
-                'name' => 'required|string|max:75',
+                'name' => "required|string|max:255|unique:contracts,name,".$data['id'].",id,deleted_at,NULL",
+                'price' => 'numeric'
+            ],[
+                'name.unique' => 'El nombre de formulario ya existe'
             ]);   
 
         //Validación update password:
@@ -91,8 +97,6 @@ class ContractController extends Controller{
                 ->withInput();
         }
 
-        dd($request->all());
-
         //Slug:
         $slug = Str::slug($request->name);
 
@@ -101,10 +105,22 @@ class ContractController extends Controller{
         $contract->slug = $slug;
         //$contract->author_id = Auth::user()->id;
         $contract->author_id = 1;
+        $contract->description = $request->description;
         $contract->price = $request->price;
         $contract->save();
 
         //Guardamos bloques:
+        foreach($request->block_item as $b){
+            $cbslug = Str::slug($b['alias']);
+
+            $cb = new ContractBlocks();
+            $cb->name = $b['alias'];
+            $cb->slug = $cbslug;
+            $cb->contract_id = $contract->id;
+            $cb->position = $b['position'];
+            $cb->father = $b['father'];
+            $cb->save();
+        }
 
         $msg = 'Contrato creado correctamente';
         return redirect()->route('contracts.edit', $contract->id)->with(compact('msg'));

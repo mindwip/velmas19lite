@@ -24,16 +24,16 @@
     <!-- Media Agency Demo Specific Stylesheet -->
     <link rel="stylesheet" href="{{ asset('demos/app-landing/app-landing.css') }}" type="text/css" />
     <!-- / -->
-    <link rel="stylesheet" href="{{ asset('css/font-icons.css" type="text/css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/font-icons.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('one-page/css/et-line.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('css/animate.css" type="text/css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('demos/app-landing/css/fonts.css') }}" type="text/css" />
     <!-- Bootstrap Switch CSS -->
     <link rel="stylesheet" href="{{ asset('css/components/bs-switches.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('demos/app-landing/css/colors.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('custom.css" type="text/css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}" type="text/css" />
 
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 </head>
@@ -43,7 +43,7 @@
     ============================================= -->
     <div id="wrapper" class="clearfix">
         <!-- Header
-    ============================================= -->
+        ============================================= -->
         <header id="header" class="split-menu" data-sticky-class="not-dark" data-responsive-class="not-dark">
             <div id="header-wrap">
                 <div class="container clearfix">
@@ -52,11 +52,11 @@
                     <!-- Logo
                     ============================================= -->
                     <div id="logo">
-                        <a href="/" class="standard-logo" data-dark-logo="{!! asset('media/logos/logo-light.png') !!}">
+                        <a href="{{ route('home') }}" class="standard-logo" data-dark-logo="{!! asset('media/logos/logo-light.png') !!}">
                             <img src="{!! asset('media/logos/logo-light.png') !!}" alt="Canvas Logo">
                         </a>
 
-                        <a href="/" class="retina-logo" data-dark-logo="{!! asset('media/logos/logo-light.png') !!}">
+                        <a href="{{ route('home') }}" class="retina-logo" data-dark-logo="{!! asset('media/logos/logo-light.png') !!}">
                             <img src="{!! asset('media/logos/logo-light.png') !!}" alt="Canvas Logo">
                         </a>
                     </div>
@@ -66,7 +66,7 @@
                     ============================================= -->
                     <nav id="primary-menu" class="with-arrows clearfix not-dark">
                         <ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="160">
-                            <li><a href="#" data-href="#wrapper">
+                            <li><a href="{{ route('home') }}" data-href="#wrapper">
                                     <div>Inicio</div>
                                 </a></li>
                             <li><a href="#" data-href="#que-es">
@@ -93,85 +93,146 @@
                             </li>
                         </ul>
                         <ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="160">
-                            <li><a href="#" data-href="#section-faqs">
+                            <li>
+                                <a href="#" data-href="#section-faqs">
                                     <div>FAQs</div>
-                                </a></li>
-                            <li><a href="#" data-href="#section-gallery">
+                                </a>
+                            </li>
+                            <li>
+                                <!-- data-href="#section-gallery" -->
+                                <a href="{{ route('contacta') }}">
                                     <div>Contacta con nosotros</div>
-                                </a></li>
-                            <li class="menu-item-emphasis"><a href="#modal-registro" data-lightbox="inline">
-                                    <div>Registrarse</div>
-                                </a></li>
-                            <li class="menu-item-emphasis"><a href="#modal-login" data-lightbox="inline">
-                                    <div>Login</div>
-                                </a></li>
+                                </a>
+                            </li>
+
+                            @guest
+                                <li class="menu-item-emphasis">
+                                    <a href="#modal-registro" data-lightbox="inline">
+                                        <div>Registrarse</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item-emphasis">
+                                    <a href="#modal-login" data-lightbox="inline">
+                                        <div>Login</div>
+                                    </a>
+                                </li>
+                            @else
+                                <li class="menu-item-emphasis">
+                                    <a href="{{ route('cliente') }}">
+                                        <div>Tu perfil</div>
+                                    </a>
+                                </li>
+
+                                <li class="menu-item-emphasis">
+                                    <a href="{{ route('logout') }}" data-lightbox="inline" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <div>Logout</div>
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </li>
+                            @endguest
                         </ul>
                     </nav>
                     <!-- #primary-menu end -->
                 </div>
             </div>
         </header>
+        <!-- #header end -->
 
+        <!-- Modal -->
+        <div class="modal1 mfp-hide" id="modal-login">
+            <div class="block divcenter" style="background-color: #FFF; max-width: 400px;">
+                <div style="padding: 50px;">
+                    <h3 class="font-body">Login </h3>
 
+                    <form action="{{ route('login') }}" method="post" class="nobottommargin">
+                        @csrf
 
+                        <div class="col_full">
+                            <label class="font-body capitalize" for="email">Email:</label>
+                            <input type="text" id="login-form-modal-username" name="email" class="form-control">
+                        </div>
+                        <div class="col_full">
+                            <label class="font-body capitalize" for="password">Password:</label>
+                            <input type="password" id="login-form-modal-password" name="password" value="" class="form-control" />
+                        </div>
 
+                        <div class="col_full nobottommargin">
+                            <button type="submit" class="button button-rounded nomargin" id="login-form-modal-submit" name="login-form-modal-submit" value="login">Login</button>
 
-
-
-
-
-
-
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Velmas19 Lite | Creador de Contratos Online') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+                            <a href="{{ route('password.request') }}" class="fright">Olvidé password</a>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </nav>
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal1 mfp-hide" id="modal-registro">
+            <div class="block divcenter" style="background-color: #FFF; max-width: 400px;">
+                <div style="padding: 50px;">
+                    <h3 class="font-body">Regístrate </h3>
+                    <form action="{{ route('register') }}" method="post" class="nobottommargin">
+                        @csrf
+
+                        <div class="col_full">
+                            <label class="font-body capitalize" for="name">Nombre:</label>
+                            <input type="text" id="login-form-modal-username" name="name" value="{{ old('name') }}" class="form-control" />
+
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="col_full">
+                            <label class="font-body capitalize" for="surname">Apellidos:</label>
+                            <input type="text" id="login-form-modal-lastname" name="surname" value="{{ old('surname') }}" class="form-control" />
+
+                            @error('surname')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="col_full">
+                            <label class="font-body capitalize" for="email">E-mail:</label>
+                            <input type="email" id="login-form-modal-mail" name="email" value="{{ old('email') }}" class="form-control" />
+
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="col_full">
+                            <label class="font-body capitalize" for="password">Password:</label>
+                            <input type="password" id="login-form-modal-password" name="password" class="form-control">
+
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="col_full">
+                            <label class="font-body capitalize" for="password_confirmation">Repite Password:</label>
+                            <input type="password" id="login-form-modal-repassword" name="password_confirmation" class="form-control" />
+                        </div>
+
+                        <div class="col_full nobottommargin">
+                            <input type="submit" class="button button-rounded nomargin" id="login-form-modal-submit" name="login-form-modal-submit" value="Registrarme">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <main class="py-4">
             @yield('content')
@@ -189,7 +250,7 @@
                             <div class="widget clearfix">
                                 <div class="row clearfix">
                                     <div class="col-lg-8 bottommargin-sm clearfix">
-                                        <img src="/admin/assets/media/logos/logo-light.png" alt="Velmas Logo"
+                                        <img src="{!! asset('admin/assets/media/logos/logo-light.png') !!}" alt="Velmas Logo"
                                             style="display: block;" class="bottommargin-sm">
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio,
                                             consequatur facere molestiae iusto atque.</p>
@@ -251,9 +312,11 @@
                         Copyrights &copy; 2019 All Rights Reserved by Velmas.<br>
                     </div>
                     <div class="col-lg-6 col-xs-12">
-                        <div class="copyright-links"><a href="/condiciones-uso.html">Condiciones de uso</a> / <a
-                                href="/politicas-privacidad.html">Políticas de
-                                Privacidad</a> / <a href="/politicas-cookies.html">Políticas de Cookies</a>
+                        <div class="copyright-links">
+                            <a href="{{ route('condiciones-uso') }}">Condiciones de uso</a> / 
+                            <a href="{{ route('politicas-privacidad') }}">Políticas de
+                                Privacidad</a> / 
+                            <a href="{{ route('politicas-cookies') }}">Políticas de Cookies</a>
                         </div>
                     </div>
                 </div>

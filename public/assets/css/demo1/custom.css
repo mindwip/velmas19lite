@@ -100,5 +100,9 @@ button.btn.btn-primary.menu:hover{background-color:#8071B9;border-color:#8071B9;
 select.form-control:not([size]):not([multiple]){
     height: auto !important;
 }
+
+.invalid-feedback{
+    display: block !important;
+}
     
   

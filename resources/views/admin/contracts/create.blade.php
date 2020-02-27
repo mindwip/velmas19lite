@@ -39,6 +39,13 @@
 							</div>
 						</div>
 
+						<div class="form-group row">
+							<label for="description" class="col-lg-2 col-form-label">Descripción:</label>
+							<div class="col-lg-10">
+								<textarea class="form-control" name="description">{{ old('description') }}</textarea>
+							</div>
+						</div>
+
 						<div class="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
 
 						<div id="kt_repeater_1">

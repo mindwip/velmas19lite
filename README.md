@@ -47,8 +47,8 @@
         ],
 
         
-## ROLES Y PERMISOS:
-Funciona mediante la librería Caffeinated\Shinobi: https://github.com/caffeinated/shinobi
+## Cart Library:
+https://github.com/Crinsane/LaravelShoppingcart
 
 ¡ATENCIÓN! a partir de la versión 4.0 no se incluye el archivo caffeinated/shinobi/src/Middleware/UserHasPermission.php, por lo que se crea manualmente y se copia el contenido de versiones anteriores.  Actúa como middleware en el archivo de rutas web.php
 
