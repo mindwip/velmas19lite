@@ -132,6 +132,13 @@
                                         @csrf
                                     </form>
                                 </li>
+
+                                @if(session('contracts'))
+                                    <li class="menu-item-emphasis">
+                                        <a href="{{ route('carrito') }}" title="ver carrito" class="icon-cart">
+                                        </a>
+                                    </li>    
+                                @endif
                             @endguest
                         </ul>
                     </nav>

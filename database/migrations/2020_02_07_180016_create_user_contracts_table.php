@@ -19,6 +19,7 @@ class CreateUserContractsTable extends Migration{
             //FK:
             $table->bigInteger('contract_id')->unsigned();
             $table->foreign('contract_id')->references('id')->on('contracts');
+            $table->text('content')->nullable();
             $table->date('payment_date')->nullable();
             $table->float('price', 5, 2)->default(0);
             $table->string('payment_method')->nullable();

@@ -46,20 +46,12 @@
 								<textarea class="form-control" name="description">{{ old('description', $contract->description) }}</textarea>
 							</div>
 						</div>
-
-						<div class="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
-
-
-
-
-
-
-
 					</div>
 				</div>
 
-				<div class="kt-separator kt-separator--border-dashed kt-separator--space-lg">
-				</div>
+				@include('admin.contracts.create-blocks')
+
+				<div class="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
 				<div class="kt-portlet__foot">
 					<div class="kt-form__actions">
 						<div class="row">
@@ -72,6 +64,61 @@
 					</div>
 				</div>
 			</form>	
+		</div>
+	</div>
+	<div class="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
+
+	<!-- Bloques del formulario -->
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="kt-portlet" id="kt_portlet">
+				<div class="kt-portlet__head">
+					<div class="kt-portlet__head-label">
+						<h3 class="kt-portlet__head-title-pages">
+							Bloques del formulario
+						</h3>
+					</div>
+				</div>
+				<div class="kt-portlet__body">
+					<!--begin: Datatable -->
+					<table
+						class="table table-striped- table-bordered table-hover table-checkable"
+						id="kt_table_5">
+						<thead>
+							<tr>
+								<th>Posición</th>
+								<th>Alias</th>
+								<th>Descripción</th>
+								<th>Estado</th>
+								<th class="text-center">Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							@foreach($blocks as $row)
+								<tr>
+									<td>{{ $row->position }}</td>
+									<td>{{ $row->name }}</td>
+									<td>{{ $row->father }}</td>
+									<td>
+										@if($row->state == 1)
+											<span class="kt-badge kt-badge--success kt-badge--inline kt-badge--pill">Activo</span>
+										@else
+											<span class="kt-badge  kt-badge--danger kt-badge--inline kt-badge--pill">Inactivo</span>
+										@endif
+									</td>
+									<td nowrap class="text-right">
+										<a href="{{ route('contracts.edit-block', $row->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Editar Bloque"><i class="la la-edit"></i></a>
+
+										<a href="{{ route('contracts.block-delete', $row->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md btn-confirm" title="Eliminar Contrato" data-msg="¿Estás seguro de eliminar este bloque del contrato?"><i class="la la-trash"></i></a>
+									</td>
+								</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!--end::Portlet-->
 		</div>
 	</div>
 </div>

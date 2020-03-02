@@ -32,6 +32,17 @@ class RegisterController extends Controller
     //protected $redirectTo = RouteServiceProvider::HOME;
     protected $redirectTo = '/';
 
+    // Redirección customizada:
+    public function redirectTo(){
+        $prev = str_replace(url('/'), '', url()->previous());
+
+        if($prev == '/checkout'){
+            return 'checkout';
+        }else{
+            return '/';
+        }
+    }
+
     /**
      * Create a new controller instance.
      *

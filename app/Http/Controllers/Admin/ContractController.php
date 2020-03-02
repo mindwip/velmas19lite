@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 //Models:
 use App\Contract;
 use App\ContractBlocks;
+use App\Variable;
 
 class ContractController extends Controller{
 	private $option = 'formularios tipo';  
@@ -66,6 +67,14 @@ class ContractController extends Controller{
         $contracts = Contract::select('contracts.*', 'users.name AS Nombre', 'users.surname')
         ->join('users', 'contracts.author_id', '=', 'users.id')
         ->get();
+
+        //Ampliación de información de los objetos:
+        if($contracts){
+            foreach($contracts as $row){
+                //Enviamos las fechas ya formateadas:
+                $row->alta = $row->created_at->format('d/m/Y');
+            }
+        }
 
         return datatables($contracts)->toJson();
     }
@@ -132,8 +141,8 @@ class ContractController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function edit(Contract $contract){
-        $op = $this->option;
-        $subop = 'Editar Contrato';
+        $op = 'Editar contrato';
+        $subop = $contract->name;
         $opActive = 'formularios';
 
         $blocks = ContractBlocks::where('contract_id', $contract->id)->get();
@@ -161,11 +170,37 @@ class ContractController extends Controller{
         $contract = Contract::find($request->input('id'));
         $contract->name = $request->name;
         $contract->slug = $slug;
+        $contract->description = $request->description;
         $contract->price = $request->price;
         $contract->save();
 
+        //Guardamos bloques:
+        foreach($request->block_item as $b){
+            $cbslug = Str::slug($b['alias']);
+
+            $cb = new ContractBlocks();
+            $cb->name = $b['alias'];
+            $cb->slug = $cbslug;
+            $cb->contract_id = $contract->id;
+            $cb->position = $b['position'];
+            $cb->father = $b['father'];
+            $cb->save();
+        }
+
         $msg = 'Contrato actualizado correctamente';
         return redirect()->route('contracts.edit', $contract->id)->with(compact('msg'));
+    }
+
+    /**
+     * Actualizar bloque:
+     */
+    public function updateBlock(Request $request){
+        $b = ContractBlocks::find($request->input('id'));
+        $b->block = $request->input('block');
+        $b->save();
+
+        $msg = 'El contenido se ha guardado correctamente';
+        return redirect()->route('contracts.edit-block',  $request->input('id'))->with(compact('msg'));
     }
 
     /**
@@ -177,4 +212,53 @@ class ContractController extends Controller{
         $msg = 'El contrato se ha eliminado correctamente';
         return redirect()->route('contracts.index')->with(compact('msg'));    
     }  
+
+    /**
+     * Eliminar bloque de contrato.
+     */
+    public function deleteBlock(ContractBlocks $block){
+        $block->delete;
+
+        $msg = 'El bloque ha sido eliminado correctamente';
+        return redirect()->route('contracts.edit', $block->contract_id)->with(compact('msg'));
+    }
+
+    /**
+     * Editar block.
+     */
+    public function editBlock(ContractBlocks $block){
+        $op = 'Editar bloque';
+        $subop = $block->name;
+        $opActive = 'formularios';
+
+        $variables = Variable::where('block_id', $block->id)->get();
+
+        return view('admin.contracts.edit-block')->with(compact('op', 'subop', 'opActive', 'block', 'variables'));
+    }
+
+    /**
+     * Guardar variable de bloque.
+     */
+    public function storeVariable(Request $request){
+        $v = new Variable();
+        $v->name = strtolower($request->name);
+        $v->type = $request->type;
+        $v->block_id = $request->block_id;
+        $v->save();
+
+        $msg = 'La variable se ha guardado correctamente';
+        return redirect()->route('contracts.edit-block',  $request->block_id)->with(compact('msg'));
+    }
+
+    /**
+     * Eliminar variable.
+     */
+    public function deleteVariable(Variable $variable){
+        $block_id = $variable->block_id;
+
+        $variable->delete();
+
+        $msg = 'La variable ha sido eliminada correctamente';
+        return redirect()->route('contracts.edit-block',  $block_id)->with(compact('msg'));
+    }
 }

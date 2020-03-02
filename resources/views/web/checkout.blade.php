@@ -30,81 +30,88 @@
 	                </div>
 	            </div>                       
 	            <div class="clear"></div>
-	        @endguest
 
-            <div class="row clearfix">
-                <div class="col-lg-12">
-                    <h3>Datos de acceso</h3>
+                <div class="row clearfix">
+                    <div class="col-lg-12">
+                        <h3>Datos de acceso</h3>
 
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde, vel odio non dicta provident sint ex autem mollitia dolorem illum repellat ipsum aliquid illo similique sapiente fugiat minus ratione.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde, vel odio non dicta provident sint ex autem mollitia dolorem illum repellat ipsum aliquid illo similique sapiente fugiat minus ratione.</p>
 
-                    <form action="{{ route('register') }}" method="post" id="billing-form" name="billing-form" class="nobottommargin">
-                    	@csrf
+                        <form action="{{ route('register') }}" method="post" id="billing-form" name="billing-form" class="nobottommargin">
+                        	@csrf
+                            <input type="hidden" name="return" value="checkout">
 
-                        <div class="col_half">
-                            <label for="name">Nombre:</label>
-                            <input type="text" id="billing-form-name" name="name" class="sm-form-control" value="{{ old('name') }}">
+                            <div class="col_half">
+                                <label for="name">Nombre:</label>
+                                <input type="text" id="billing-form-name" name="name" class="sm-form-control" value="{{ old('name') }}">
 
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
 
-                        <div class="col_half col_last">
-                            <label for="surname">Apellidos:</label>
-                            <input type="text" id="billing-form-lname" name="surname" value="{{ old('surname') }}" class="sm-form-control" />
+                            <div class="col_half col_last">
+                                <label for="surname">Apellidos:</label>
+                                <input type="text" id="billing-form-lname" name="surname" value="{{ old('surname') }}" class="sm-form-control" />
 
-                            @error('surname')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="clear"></div>
+                                @error('surname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="clear"></div>
 
-                        <div class="col_half">
-                            <label for="email">Email:</label>
-                            <input type="email" id="billing-form-email" name="email" value="{{ old('email') }}" class="sm-form-control" />
+                            <div class="col_half">
+                                <label for="email">Email:</label>
+                                <input type="email" id="billing-form-email" name="email" value="{{ old('email') }}" class="sm-form-control" />
 
-                           	@error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>    
+                               	@error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>    
 
-                      	<div class="col_half col_last">
-                      		<label for="city">Ciudad</label>
-                      		<input type="text" id="billing-form-city" name="city" value="{{ old('city') }}" class="sm-form-control" />
-                           
-                           	@error('city')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                          	<div class="col_half col_last">
+                          		<label for="city">Ciudad</label>
+                          		<input type="text" id="billing-form-city" name="city" value="{{ old('city') }}" class="sm-form-control" />
+                               
+                               	@error('city')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
 
-                        <div class="col_half">
-                            <label for="password">Password:</label>
-                            <input type="password" id="billing-form-phone" name="password" class="sm-form-control">
+                            <div class="col_half">
+                                <label for="password">Password:</label>
+                                <input type="password" id="billing-form-phone" name="password" class="sm-form-control">
 
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
 
-                        <div class="col_half col_last">
-                            <label for="password_confirmation">Repetir Password:</label>
-                            <input type="password" id="billing-form-phone" name="password_confirmation" class="sm-form-control" />
-                        </div>
-                    </form>
+                            <div class="col_half col_last">
+                                <label for="password_confirmation">Repetir Password:</label>
+                                <input type="password" id="billing-form-phone" name="password_confirmation" class="sm-form-control" />
+                            </div>
+
+                            <div class="col_full nobottommargin">
+                                <input type="submit" class="button button-rounded nomargin" name="submit_password" value="Seguir">
+                            </div>
+                        </form>
+                    </div>
                 </div>
-               
                 <div class="w-100 bottommargin"></div>
+            @endguest
+              
+            <div class="row clearfix"> 
                 <div class="col-lg-6">
                     <h4>Resumen de la Compra</h4>
 

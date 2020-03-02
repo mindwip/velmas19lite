@@ -33,6 +33,14 @@ class UserContractsController extends Controller{
 		->join('contracts', 'user_contracts.contract_id', '=', 'contracts.id')
 		->get();
 
+		//Ampliación de información de los objetos:
+        if($revisiones){
+            foreach($revisiones as $row){
+                //Enviamos las fechas ya formateadas:
+                $row->alta = $row->created_at->format('d/m/Y');
+            }
+        }
+
 		return datatables($revisiones)->toJson();
 	}
 

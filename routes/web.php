@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('formulario/{slug}', 'HomeController@formulario')->name('formulario');
+Route::get('formulario-editar/{slug}', 'HomeController@editContract')->name('formulario-editar');
 Route::get('contratar/{slug}', 'HomeController@addCarrito')->name('contratar');
 Route::get('carrito', 'HomeController@carrito')->name('carrito');
 Route::get('checkout', 'HomeController@checkout')->name('checkout');
@@ -27,7 +28,10 @@ Route::get('condiciones-uso', 'HomeController@condicionesUso')->name('condicione
 Route::get('politicas-privacidad', 'HomeController@politicasPrivacidad')->name('politicas-privacidad');
 Route::get('politicas-cookies', 'HomeController@politicasCookies')->name('politicas-cookies');
 Route::get('contacta', 'HomeController@contacta')->name('contacta');
-Route::get('cliente', 'HomeController@cliente')->name('cliente');
+
+Route::get('cliente', 'CustomerController@index')->name('cliente');
+Route::post('cliente', 'CustomerController@update')->name('cliente.update');
+Route::post('cliente-password', 'CustomerController@updatePassword')->name('cliente.update-password');
 
 // LOGOUT:
 Route::get('logout', 'Auth\LoginController@logout', function (){
@@ -40,7 +44,7 @@ Route::get('logout', 'Auth\LoginController@logout', function (){
 // BACKEND:  middleware(['auth', 'admin'])->
 Route::prefix('admin')->namespace('Admin')->group(function(){
 	//Admin / Dashboard:
-	Route::get('dashboard', 'AdminController@index')->name('admin');
+	Route::get('/dashboard', 'AdminController@index')->name('admin');
 
 	//Contracts:
 	Route::get('contracts', 'ContractController@index')->name('contracts.index');
@@ -49,6 +53,11 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
 	Route::get('contracts/{contract}/edit', 'ContractController@edit')->name('contracts.edit');
 	Route::post('contracts/update', 'ContractController@update')->name('contracts.update');
 	Route::get('contracts/{contract}/delete', 'ContractController@destroy')->name('contracts.delete');
+	Route::get('contracts/block-delete/{block}', 'ContractController@deleteBlock')->name('contracts.block-delete');
+	Route::get('contracts/{block}/edit-block', 'ContractController@editBlock')->name('contracts.edit-block');
+	Route::post('contracts/update-block', 'ContractController@updateBlock')->name('contracts.update-block');
+	Route::post('contracts/store-variable', 'ContractController@storeVariable')->name('contracts.store-variable');
+	Route::get('contracts/{variable}/delete-variable', 'ContractController@deleteVariable')->name('contracts.delete-variable');
 
 	//Customers:
 	Route::get('users/create-customer', 'UserController@createCustomer')->name('users.create-customer');

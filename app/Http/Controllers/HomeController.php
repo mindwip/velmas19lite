@@ -105,6 +105,19 @@ class HomeController extends Controller{
     }
 
     /**
+     * Editar contrato.
+     */
+    public function editContract($slug = false){
+        if(!$slug){
+            return redirect('/');
+        }
+
+        $contract = Contract::where('slug', $slug)->first();
+
+        return view('web.formulario-editar')->with(compact('contract'));   
+    }
+
+    /**
      * Eliminar contrato de carrito:
      */
     public function deleteContract($id = false){
@@ -145,16 +158,5 @@ class HomeController extends Controller{
     public function contacta(){
         return view('web.contact');    
     }
-
-    /**
-     * Perfil de cliente.
-     */
-    public function cliente(){
-        $contracts = UserContracts::select('contracts.*')
-            ->join('contracts', 'user_contracts.contract_id', '=', 'contracts.id')
-            ->where('user_contracts.user_id', Auth::user()->id)
-            ->get();
-
-        return view('web.cliente')->with(compact('contracts'));    
-    }
+    
 }

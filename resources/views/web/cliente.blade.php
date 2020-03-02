@@ -30,6 +30,7 @@
 									<li><a href="#tab-password"><i class="icon-lock"></i> Contraseña</a></li>
 								</ul>
 								<div class="tab-container">
+									<!-- Contratos: -->
 									<div class="tab-content clearfix" id="tab-feeds">
 										<p class="">Lorem ipsum dolor sit amet, consectetur adipisicing
 											elit. Laudantium harum ea quo! Nulla fugiat earum, sed corporis
@@ -46,6 +47,33 @@
 												</tr>
 											</thead>
 											<tbody>
+
+												<tr>
+													<td>
+														<code>19/3/2019</code>
+													</td>
+													<td>
+														<a href="#">
+															Arrendamiento casa
+														</a>
+														&nbsp;&nbsp;
+														<a href="#"> <i class="icon-edit"
+																title="Editar Nombre Documento"></i></a>
+													</td>
+													<td>
+														Arrendamientos
+													</td>
+													<td><a href="carrito.html"
+															class="button button-mini button-circle button-red"><i
+																class="icon-legal"></i>Revisar</a>&nbsp;<a
+															href="{{ route('formulario-editar', 'contrato-de-compra') }}"
+															class="button button-mini button-circle button-blue"><i
+																class="icon-play"></i>Iniciar
+															Contrato</a>&nbsp;<a href="#"
+															class="button button-mini button-circle button-green"><i
+																class="icon-file-pdf1"></i>Descargar</a>
+													</td>
+												</tr>
 									
 												@foreach($contracts as $row)
 													<tr>
@@ -69,7 +97,7 @@
 																<i class="icon-legal"></i>Revisar
 															</a>&nbsp;
 
-															<a href="vista-formulario.html" class="button button-mini button-circle button-blue">
+															<a href="{{ route('formulario-editar', $row->slug) }}" class="button button-mini button-circle button-blue">
 																<i class="icon-play"></i>Iniciar Contrato
 															</a>&nbsp;
 
@@ -84,6 +112,7 @@
 										</table>
 									</div>
 
+									<!-- Datos personales -->
 									<div class="tab-content clearfix" id="tab-posts">
 										<div class="row topmargin-sm clearfix">
 											<div class="col-12 bottommargin-sm">
@@ -93,7 +122,7 @@
 														elit. Unde, vel odio non dicta provident sint ex
 														autem mollitia dolorem illum repellat ipsum aliquid
 														illo similique sapiente fugiat minus ratione.</p>
-													<form id="billing-form" name="billing-form" class="nobottommargin" action="#" method="post">
+													<form id="billing-form" name="billing-form" class="nobottommargin" action="{{ route('cliente.update') }}" method="post">
 														@csrf
 
 														<div class="col_half">
@@ -121,7 +150,7 @@
 
 														<div class="col_half">
 															<label for="email">Email:</label>
-															<input type="email" id="billing-form-email" name="billing-form-email" value="{{ old('email', Auth::user()->email) }}" class="sm-form-control" />
+															<input type="email" id="billing-form-email" name="email" value="{{ old('email', Auth::user()->email) }}" class="sm-form-control" />
 
 															@error('email')
 								                                <span class="invalid-feedback" role="alert">
@@ -142,10 +171,10 @@
 														</div>
 														
 														<div class="col_full nobottommargin">
-															<button class="button button-rounded nomargin"
+															<input type="submit" class="button button-rounded nomargin"
 																id="login-form-modal-submit"
-																name="login-form-modal-submit"
-																value="login">Guardar</button>
+																name="submit_update"
+																value="Guardar">
 														</div>
 													</form>
 												</div>
@@ -153,35 +182,36 @@
 										</div>
 									</div>
 
+									<!-- Password -->
 									<div class="tab-content clearfix" id="tab-password">
 										<div class="row topmargin-sm clearfix">
 											<div class="col-12 bottommargin-sm">
 												<div class="col-lg-12">
 													<h3>Cambiar contraseña</h3>
 			
-													<form id="billing-form" name="billing-form" class="nobottommargin" action="#" method="post">
+													<form class="nobottommargin" action="{{ route('cliente.update-password') }}" method="post" role="form">
 														@csrf
 
 														<div class="col_half">
 															<label
 																for="billing-form-phone">Password:</label>
 															<input type="password" id="billing-form-phone"
-																name="billing-form-phone" value=""
+																name="password" value=""
 																class="sm-form-control" />
 														</div>
 														<div class="col_half col_last">
 															<label for="billing-form-phone">Repetir
 																Password:</label>
 															<input type="password" id="billing-form-phone"
-																name="billing-form-phone" value=""
+																name="password_confirmation" value=""
 																class="sm-form-control" />
 														</div>
 
 														<div class="col_full nobottommargin">
-															<button class="button button-rounded nomargin"
+															<input type="submit" class="button button-rounded nomargin"
 																id="login-form-modal-submit"
-																name="login-form-modal-submit"
-																value="login">Guardar</button>
+																name="submit_password"
+																value="Guardar">
 														</div>
 													</form>
 												</div>

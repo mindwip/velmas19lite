@@ -271,7 +271,7 @@ var KTDatatablesAdvancedColumnRenderingFormularios = function() {
                 {data: 'id'},
                 {data: 'name'},
                 {data: 'author_id'},
-                {data: 'created_at'},
+                {data: 'alta'},
                 {data: 'state'},
                 {data: 'id', className: 'text-right'}
             ],
@@ -442,7 +442,7 @@ var KTDatatablesAdvancedColumnRenderingFormulariosCreados = function() {
                 {data: 'id'},
                 {data: 'name'},
                 {data: 'Nombre'},
-                {data: 'created_at'},
+                {data: 'alta'},
                 {data: 'state'},
                 {data: 'id', className: 'text-right'}
             ],

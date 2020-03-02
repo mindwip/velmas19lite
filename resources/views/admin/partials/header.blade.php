@@ -3,7 +3,7 @@
 	<!-- begin:: Header Mobile -->
 	<div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
 		<div class="kt-header-mobile__logo">
-			<a href="/">
+			<a href="{{ route('admin') }}">
 				<img alt="Logo" src="{!! asset('assets/media/logos/logo-light.png') !!}" width="100" height="" />
 			</a>
 		</div>
@@ -30,7 +30,7 @@
 				<!-- begin:: Aside -->
 				<div class="kt-aside__brand kt-grid__item " id="kt_aside_brand">
 					<div class="kt-aside__brand-logo">
-						<a href="index.html">
+						<a href="{{ route('admin') }}">
 							<img alt="Logo" src="{!! asset('assets/media/logos/logo-light.png') !!}" width="100" />
 						</a>
 					</div>
