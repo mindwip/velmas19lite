@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use PDF;
 
 //Models:
 use App\Contract;
 use App\ContractBlocks;
 use App\User;
 use App\UserContracts;
+use App\Variable;
 
 class CustomerController extends Controller{
 	private $option = 'usuarios';
@@ -121,5 +123,117 @@ class CustomerController extends Controller{
             return redirect()->route('users.customers')->with(compact('msg'));    
         }
     }  
+
+    /**
+     * Editar contrato.
+     */
+    public function editContract(UserContracts $user_contract){
+        if(!$user_contract){
+            return redirect('/');
+        }
+
+        //Comprobamos que el contrato pertenezca al usuario.
+        /*if(Auth::user()->id != $user_contract->user_id){
+            return redirect('logout');
+            exit;
+        }*/
+
+        $contract = Contract::find($user_contract->id);
+
+        //Si el contenido original del contrato no está volcado en la tabla user_contracts, lo pasamos:
+        if(!$user_contract->content){
+            $contents = ContractBlocks::select('block')
+            ->where('contract_id', $user_contract->contract_id)
+            ->orderBy('position', 'ASC')
+            ->get();
+
+            $content = '';
+            foreach($contents as $row){
+                $content .= $row->block;
+            }
+
+            $user_contract->content = $content;
+            $user_contract->save();
+        }
+
+        //Variables del formulario:
+        $variables = Variable::select('variables.id', 'variables.name', 'variables.type')
+        ->join('contract_blocks', 'variables.block_id', '=', 'contract_blocks.id')
+        ->where('contract_blocks.contract_id', $user_contract->contract_id)
+        ->get();
+
+        return view('web.formulario-editar')->with(compact('user_contract', 'contract', 'variables'));   
+    }
+
+    /**
+     * Actualizar contrato de cliente.
+     */
+    public function updateContract(Request $request){
+        $campos_recibidos = (count($request->all()) - 2) / 2;
+        $serie = [];
+
+        for($i=1; $i<=$campos_recibidos; $i++){
+            $var = 'variable_'.$i; 
+            $$var = $request->input($var);
+
+            $valor = 'valor_'.$$var;
+            $$valor = $request->input($valor);
+
+            $serie[$$var] = $$valor;
+        }
+
+        $variables = serialize($serie);
+
+        $uc = UserContracts::find($request->id);
+        $uc->variables = $variables;
+        $uc->save();
+
+        return redirect()->route('formulario-editar', $request->id);    
+    }
+
+    /**
+     * Descarga de formulario.
+     */
+    public function downloadContract(UserContracts $user_contract){
+        //Comprobamos que el contrato pertenezca al usuario.
+        /*if(Auth::user()->id != $user_contract->user_id){
+            return redirect('logout');
+            exit;
+        }*/
+
+        $contract = Contract::find($user_contract->id);
+
+        //Variables del formulario:
+        $variables = Variable::select('variables.id', 'variables.name', 'variables.type')
+        ->join('contract_blocks', 'variables.block_id', '=', 'contract_blocks.id')
+        ->where('contract_blocks.contract_id', $user_contract->contract_id)
+        ->get();
+
+        $values = unserialize($user_contract->variables);
+
+        $content = '';
+        $j = 1;
+        preg_match_all('/\[+[a-zA-Z0-9]+\]/', $user_contract->content, $matches);
+        $arr = [];
+
+        foreach($matches[0] as $match){
+            $match1 = $match;
+            $match1 = substr($match1,1);
+            $match1 = substr($match1,0,-1);
+
+            foreach($variables as $var){
+                if($var->name == $match1){
+                    array_push($arr, $values[$var->id]);
+                }
+            }
+        }
+
+        $content = str_replace($matches[0], $arr, $user_contract->content);
+
+        $pdf = PDF::loadView('downloads/contract', compact('user_contract', 'contract', 'content'));
+        $pdf->setPaper('L', 'portrait');
+
+        return $pdf->download('contrato.pdf');
+    }
 
 }

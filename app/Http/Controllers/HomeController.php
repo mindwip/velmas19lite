@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use PDF;
 
 //Models:
 use App\Contract;
@@ -103,66 +104,6 @@ class HomeController extends Controller{
         $contracts = Contract::whereIn('id', session('contracts'))->get();
         
         return view('web.carrito')->with(compact('contracts'));
-    }
-
-    /**
-     * Editar contrato.
-     */
-    public function editContract(UserContracts $user_contract){
-        if(!$user_contract){
-            return redirect('/');
-        }
-
-        $contract = Contract::find($user_contract->id);
-
-        //Si el contenido original del contrato no está volcado en la tabla user_contracts, lo pasamos:
-        if(!$user_contract->content){
-            $contents = ContractBlocks::select('block')
-            ->where('contract_id', $user_contract->contract_id)
-            ->orderBy('position', 'ASC')
-            ->get();
-
-            $content = '';
-            foreach($contents as $row){
-                $content .= $row->block;
-            }
-
-            $user_contract->content = $content;
-        }
-
-        //Variables del formulario:
-        $variables = Variable::select('variables.id', 'variables.name', 'variables.type')
-        ->join('contract_blocks', 'variables.block_id', '=', 'contract_blocks.id')
-        ->where('contract_blocks.contract_id', $user_contract->contract_id)
-        ->get();
-
-        return view('web.formulario-editar')->with(compact('user_contract', 'contract', 'variables'));   
-    }
-
-    /**
-     * Actualizar contrato de cliente.
-     */
-    public function updateContract(Request $request){
-        $campos_recibidos = (count($request->all()) - 2) / 2;
-        $serie = [];
-
-        for($i=1; $i<=$campos_recibidos; $i++){
-            $var = 'variable_'.$i; 
-            $$var = $request->input($var);
-
-            $valor = 'valor_'.$$var;
-            $$valor = $request->input($valor);
-
-            $serie[$$var] = $$valor;
-        }
-
-        $variables = serialize($serie);
-
-        $uc = UserContracts::find($request->id);
-        $uc->variables = $variables;
-        $uc->save();
-
-        return redirect()->route('formulario-editar', $request->id);    
     }
 
     /**

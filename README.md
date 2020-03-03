@@ -50,6 +50,9 @@
 ## Cart Library:
 https://github.com/Crinsane/LaravelShoppingcart
 
+## PDF Library:
+https://github.com/barryvdh/laravel-dompdf
+
 ¡ATENCIÓN! a partir de la versión 4.0 no se incluye el archivo caffeinated/shinobi/src/Middleware/UserHasPermission.php, por lo que se crea manualmente y se copia el contenido de versiones anteriores.  Actúa como middleware en el archivo de rutas web.php
 
 ## IDIOMAS:

@@ -19,9 +19,7 @@
 					<div class="clear"></div>
 
 					<div class="row clearfix">
-
 						<div class="col-lg-12">
-
 							<div class="tabs tabs-alt clearfix" id="tabs-profile">
 
 								<ul class="tab-nav clearfix">
@@ -57,8 +55,9 @@
 															Arrendamiento casa
 														</a>
 														&nbsp;&nbsp;
-														<a href="#"> <i class="icon-edit"
-																title="Editar Nombre Documento"></i></a>
+														<a href="#"> 
+															<i class="icon-edit" title="Editar Nombre Documento"></i>
+														</a>
 													</td>
 													<td>
 														Arrendamientos
@@ -70,7 +69,7 @@
 														<a href="{{ route('formulario-editar', 1) }}" class="button button-mini button-circle button-blue">
 															<i class="icon-play"></i>Iniciar Contrato
 														</a>&nbsp;
-														<a href="#" class="button button-mini button-circle button-green">
+														<a href="{{ route('formulario-download', 1) }}" class="button button-mini button-circle button-green">
 															<i class="icon-file-pdf1"></i>Descargar
 														</a>
 													</td>
@@ -102,7 +101,7 @@
 																<i class="icon-play"></i>Iniciar Contrato
 															</a>&nbsp;
 
-															<a href="#" class="button button-mini button-circle button-green">
+															<a href="{{ route('formulario-download', $row->id) }}" class="button button-mini button-circle button-green">
 																<i class="icon-file-pdf1"></i>Descargar
 															</a>
 														</td>
