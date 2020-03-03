@@ -19,7 +19,9 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('formulario/{slug}', 'HomeController@formulario')->name('formulario');
-Route::get('formulario-editar/{slug}', 'HomeController@editContract')->name('formulario-editar');
+Route::get('formulario-editar/{user_contract}', 'HomeController@editContract')->name('formulario-editar');
+Route::post('formulario-update', 'HomeController@updateContract')->name('formulario-update');
+
 Route::get('contratar/{slug}', 'HomeController@addCarrito')->name('contratar');
 Route::get('carrito', 'HomeController@carrito')->name('carrito');
 Route::get('checkout', 'HomeController@checkout')->name('checkout');

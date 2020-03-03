@@ -63,15 +63,16 @@
 													<td>
 														Arrendamientos
 													</td>
-													<td><a href="carrito.html"
-															class="button button-mini button-circle button-red"><i
-																class="icon-legal"></i>Revisar</a>&nbsp;<a
-															href="{{ route('formulario-editar', 'contrato-de-compra') }}"
-															class="button button-mini button-circle button-blue"><i
-																class="icon-play"></i>Iniciar
-															Contrato</a>&nbsp;<a href="#"
-															class="button button-mini button-circle button-green"><i
-																class="icon-file-pdf1"></i>Descargar</a>
+													<td>
+														<a href="carrito.html" class="button button-mini button-circle button-red">
+															<i class="icon-legal"></i>Revisar
+														</a>&nbsp;
+														<a href="{{ route('formulario-editar', 1) }}" class="button button-mini button-circle button-blue">
+															<i class="icon-play"></i>Iniciar Contrato
+														</a>&nbsp;
+														<a href="#" class="button button-mini button-circle button-green">
+															<i class="icon-file-pdf1"></i>Descargar
+														</a>
 													</td>
 												</tr>
 									

@@ -18,6 +18,7 @@ class CustomerController extends Controller{
 	private $option = 'usuarios';
 
 	public function __construct(){
+        $this->middleware('auth');
         //$this->middleware('user_edit', ['only' => ['edit', 'update', 'updatePwd', 'storeImage']]);
     }	
 

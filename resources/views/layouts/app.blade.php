@@ -341,6 +341,8 @@
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>
 
+    @stack('scripts')
+
     <!-- Footer Scripts
     ============================================= -->
     <script src="{{ asset('js/functions.js') }}"></script>
