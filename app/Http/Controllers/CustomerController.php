@@ -212,7 +212,6 @@ class CustomerController extends Controller{
         $values = unserialize($user_contract->variables);
 
         $content = '';
-        $j = 1;
         preg_match_all('/\[+[a-zA-Z0-9]+\]/', $user_contract->content, $matches);
         $arr = [];
 
