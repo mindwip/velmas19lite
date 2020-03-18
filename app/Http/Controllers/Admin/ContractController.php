@@ -250,25 +250,33 @@ class ContractController extends Controller{
      * Guardar variable de bloque.
      */
     public function storeVariable(Request $request){
-        $v = new Variable();
-        $v->name = strtolower($request->name);
-        $v->type = $request->type;
-        $v->block_id = $request->block_id;
-        $v->save();
+        if($request->ajax()){ 
+            $v = new Variable();
+            $v->name = strtolower($request->name);
+            $v->type = $request->type;
+            $v->block_id = $request->block_id;
+            $v->save();
 
-        $msg = 'La variable se ha guardado correctamente';
-        return redirect()->route('contracts.edit-block',  $request->block_id)->with(compact('msg'));
+            //$msg = 'La variable se ha guardado correctamente';
+            //return redirect()->route('contracts.edit-block',  $request->block_id)->with(compact('msg'));
+            
+            return response()->json($v);
+        }
     }
 
     /**
      * Eliminar variable.
      */
-    public function deleteVariable(Variable $variable){
-        $block_id = $variable->block_id;
+    public function deleteVariable(Request $request, Variable $variable){
+        if($request->ajax()){ 
+            //$block_id = $variable->block_id;
 
-        $variable->delete();
+            $variable->delete();
 
-        $msg = 'La variable ha sido eliminada correctamente';
-        return redirect()->route('contracts.edit-block',  $block_id)->with(compact('msg'));
+            //$msg = 'La variable ha sido eliminada correctamente';
+            //return redirect()->route('contracts.edit-block',  $block_id)->with(compact('msg'));
+            
+            return response()->json(true);
+        }
     }
 }

@@ -8,7 +8,7 @@
 		<div class="col-lg-3">
 			<label class="col-lg-12 col-form-label">Campos variables</label>
 
-			<form class="kt-form" method="post" action="{{ route('contracts.store-variable') }}" accept-charset="utf-8" role="form">
+			<form class="kt-form" method="post" action="#" id="frmStoreVariable" accept-charset="utf-8" role="form">
 				{{ csrf_field() }}
 				<input type="hidden" name="block_id" value="{{ $block->id }}">	
 
@@ -36,7 +36,7 @@
 				<br>
 
 				<div class="row">
-					<table class="table table-striped- table-bordered table-hover table-checkable">
+					<table class="table table-striped- table-bordered table-hover table-checkable" id="tblVariables">
 						<thead>
 							<tr>
 								<th>Variable</th>
@@ -45,10 +45,10 @@
 						</thead>
 						<tbody>
 							@foreach($variables as $var)
-								<tr>
+								<tr class="tr-{{ $var->id }}">
 									<td>{{ $var->name }}</td>
 									<td class="text-right">
-										<a href="{{ route('contracts.delete-variable', $var->id) }}" class="btn-confirm" data-msg="¿Estás seguro de eliminar esta variable?">
+										<a href="#" data-id="{{ $var->id }}" class="btnDeleteVariable" data-msg="¿Estás seguro de eliminar esta variable?">
 											<i class="la la-trash-o"></i>
 										</a>
 									</td>
@@ -111,6 +111,43 @@ $(document).ready(function(){
     	if(option != ''){
     		$('#tipoNombre').attr('disabled', false);
     	}
+    });
+
+    //Guardar variable:
+    $('#frmStoreVariable').on('submit', function(e){
+    	e.preventDefault();
+    	var data = $(this).serialize();
+    	$.ajax({
+            url: "/admin/contracts/store-variable",
+            type: "POST",
+            data: data, 
+            cache: false,
+            datatype: "JSON",
+            success: function(response){
+            	var html = '<tr class="tr-'+response.id+'">';
+            		html += '<td>'+response.name+'</td>';
+            		html += '<td class="text-right"><a href="3" data-id="'+response.id+'" class="btnDeleteVariable" data-msg="¿Estás seguro de eliminar esta variable?"><i class="la la-trash-o"></i></a></td>';
+            	html += '</tr>';
+            	
+            	$('#tblVariables tbody').append(html);	    
+            }
+        }); 
+    });
+
+    //Eliminar variable:
+    $(document).on('click', '.btnDeleteVariable', function(e){
+    	e.preventDefault();
+
+    	if(confirm('¿Estás seguro de eliminar esta variable?')){
+    		var id = $(this).data('id');
+
+    		$.get("/admin/contracts/"+id+"/delete-variable", function(response, state){
+    			$('.tr-'+id).remove();
+    		});
+    			
+        }else{
+            return false;
+        }
     });
 });
 </script>
