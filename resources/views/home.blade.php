@@ -3,9 +3,13 @@
 @section('content')
 
 @if($errors->any())
-    @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-    @endforeach
+    <div class="errorMsg"> 
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
 @endif
 
 <section id="slider" class="slider-element full-screen slider-parallax">

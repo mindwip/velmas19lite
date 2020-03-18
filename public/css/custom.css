@@ -5,6 +5,9 @@
 	Overwriting Default Theme Styles for Better Handling Updates
 -----------------------------------------------------------------*/
 
+main{
+    position: relative;
+}
 
 #footer {position: relative;background-color: #8071b9;border-top: 5px solid rgba(0,0,0,.2);}
 #header:not(.sticky-header) #primary-menu > ul > li.menu-item-emphasis > a {background-color: #412da4;color:#ffffff;text-shadow: none;}
@@ -41,5 +44,31 @@ p>strong{color:#412da4}
 .variable{
     font-weight: bold;
 }
+
+.errorMsg{
+    left: 0;
+    margin: 0 auto;
+    max-width: 800px;
+    position: absolute;
+    right: 0;
+    width: 100%;   
+    z-index: 100;
+}
+    .errorMsg ul{
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+        .errorMsg ul li{
+            background-color: #DD6666;
+            border-bottom: 1px solid #EEE;
+            color: #FFF;
+            display: block;
+            font-size: 18px;
+            font-weight: bold;
+            list-style: none;
+            padding: 12px 0;
+            text-align: center;
+        }
 
 
