@@ -28,8 +28,7 @@ var KTDatatablesAdvancedColumnRenderingUsuarios = function() {
                                         <a href="#" class="kt-user-card-v2__email kt-link">` + full[1] + `</a>
                                     </div>
                                 </div>`;
-						}
-						else {
+						}else{
 							var stateNo = KTUtil.getRandomInt(0, 7);
 							var states = [
 								'activo',
@@ -87,14 +86,14 @@ var KTDatatablesAdvancedColumnRenderingUsuarios = function() {
 				{
 					targets: 3,
 					render: function(data, type, full, meta) {
-						var status = {
+						/*var status = {
 							1: {'title': 'Activo', 'class': ' kt-badge--success'},
-							2: {'title': 'Bloqueado', 'class': ' kt-badge--danger'},							
+							0: {'title': 'Bloqueado', 'class': ' kt-badge--danger'},							
 						};
 						if (typeof status[data] === 'undefined') {
 							return data;
 						}
-						return '<span class="kt-badge ' + status[data].class + ' kt-badge--inline kt-badge--pill">' + status[data].title + '</span>';
+						return '<span class="kt-badge ' + status[data].class + ' kt-badge--inline kt-badge--pill">' + status[data].title + '</span>'; */
 					},
 				},				
 			],

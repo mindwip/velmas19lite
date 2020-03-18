@@ -139,7 +139,7 @@
 	                                        <a target="_blank" href="{{ route('formulario', $row->slug) }}">{{ $row->name }}</a>
 	                                    </td>
 	                                    <td class="cart-product-subtotal">
-	                                        <span class="amount">{{ $row->price }}€</span>
+	                                        <span class="amount">{{ $row->price }}COL$</span>
 	                                    </td>
 	                                </tr>   
 
@@ -164,7 +164,7 @@
                                     </td>
 
                                     <td class="cart-product-name">
-                                        <span class="amount color lead"><strong>{{ $total }}€</strong></span>
+                                        <span class="amount color lead"><strong>{{ $total }}COL$</strong></span>
                                     </td>
                                 </tr>
                             </tbody>

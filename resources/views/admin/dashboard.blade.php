@@ -23,17 +23,11 @@
 						Gestionar Usuarios APP
 					</div>
 				</div>
-				<div class="kt-portlet__body">
+				<!-- <div class="kt-portlet__body">
 					<div class="kt-portlet__content">
-						Lorem Ipsum is simply dummy text of the printing and typesetting
-						industry. Lorem Ipsum has been the industry's standard dummy text ever
-						since the 1500s, when an unknown printer took a galley of type and
-						scrambled. Lorem Ipsum is simply dummy text of the printing and
-						typesetting industry. Lorem Ipsum has been the industry's standard dummy
-						text ever since the 1500s, when an unknown printer took a galley of type
-						and scrambled.
+						
 					</div>
-				</div>
+				</div> -->
 				<div class="kt-portlet__foot kt-portlet__foot--sm kt-align-right">
 					<a href="{{ route('users.index') }}" class="btn btn-font-light btn-outline-hover-light">Gestionar Usuarios</a>
 				</div>
@@ -54,17 +48,11 @@
 						Gestionar Formularios
 					</div>
 				</div>
-				<div class="kt-portlet__body">
+				<!-- <div class="kt-portlet__body">
 					<div class="kt-portlet__content">
-						Lorem Ipsum is simply dummy text of the printing and typesetting
-						industry. Lorem Ipsum has been the industry's standard dummy text ever
-						since the 1500s, when an unknown printer took a galley of type and
-						scrambled. Lorem Ipsum is simply dummy text of the printing and
-						typesetting industry. Lorem Ipsum has been the industry's standard dummy
-						text ever since the 1500s, when an unknown printer took a galley of type
-						and scrambled.
+						
 					</div>
-				</div>
+				</div> -->
 				<div class="kt-portlet__foot kt-portlet__foot--sm kt-align-right">
 					<a href="formularios.html"
 						class="btn btn-font-light btn-outline-hover-light">Gestionar
@@ -86,14 +74,11 @@
 						Crear Formularios
 					</div>
 				</div>
-				<div class="kt-portlet__body">
+				<!-- <div class="kt-portlet__body">
 					<div class="kt-portlet__content">
-						Lorem Ipsum is simply dummy text of the printing and typesetting
-						industry. Lorem Ipsum has been the industry's standard dummy text ever
-						since the 1500s,
-						when an unknown printer took a galley of type and scrambled.
+						
 					</div>
-				</div>
+				</div> -->
 				<div class="kt-portlet__foot kt-portlet__foot--sm kt-align-right">
 					<a href="crear-formularios.html"
 						class="btn btn-font-light btn-elevate btn-outline-hover-light">Crear
@@ -115,14 +100,11 @@
 						Resumen de Pagos
 					</div>
 				</div>
-				<div class="kt-portlet__body">
+				<!-- <div class="kt-portlet__body">
 					<div class="kt-portlet__content">
-						Lorem Ipsum is simply dummy text of the printing and typesetting
-						industry. Lorem Ipsum has been the industry's standard dummy text ever
-						since the 1500s,
-						when an unknown printer took a galley of type and scrambled.
+						
 					</div>
-				</div>
+				</div> -->
 				<div class="kt-portlet__foot kt-portlet__foot--sm kt-align-right">
 					<a href="pagos.html"
 						class="btn btn-font-light btn-elevate btn-outline-hover-light">Gestionar

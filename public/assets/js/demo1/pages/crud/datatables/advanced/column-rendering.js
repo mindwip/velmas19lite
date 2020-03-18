@@ -106,7 +106,7 @@ var KTDatatablesAdvancedColumnRenderingUsuarios = function() {
 					render: function(data, type, full, meta) {
 						var status = {
 							1: {'title': 'Activo', 'class': ' kt-badge--success'},
-							2: {'title': 'Bloqueado', 'class': ' kt-badge--danger'},							
+							0: {'title': 'Bloqueado', 'class': ' kt-badge--danger'},							
 						};
 						if (typeof status[data] === 'undefined') {
 							return data;
