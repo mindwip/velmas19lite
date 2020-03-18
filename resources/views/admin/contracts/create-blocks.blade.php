@@ -9,7 +9,7 @@
 							<label>Alias:</label>
 						</div>
 						<div class="kt-form__control">
-							<input name="block_item[1][alias]" type="text" class="form-control" placeholder="Enter full name">
+							<input name="block_item[1][alias]" type="text" class="form-control" placeholder="Enter full name" required>
 						</div>
 					</div>
 					<div class="d-md-none kt-margin-b-10"></div>
@@ -21,7 +21,7 @@
 							<label class="kt-label m-label--single">Posición:</label>
 						</div>
 						<div class="kt-form__control">
-							<input name="block_item[1][position]" type="number" class="form-control" placeholder="Ej: 1">
+							<input name="block_item[1][position]" type="number" class="form-control" placeholder="Ej: 1" value="1" required>
 						</div>
 					</div>
 					<div class="d-md-none kt-margin-b-10"></div>
@@ -29,7 +29,7 @@
 				<div class="col-md-4">
 					<label for="exampleSelect1">Bloque Padre
 					</label>
-					<select name="block_item[1][father]" class="form-control">
+					<select name="block_item[1][father]" class="form-control" required>
 						<option>No</option>
 						<option>Presentación</option>
 						<option>Cabecera</option>
@@ -59,3 +59,6 @@
 		</div>
 	</div>
 </div>
+
+
+

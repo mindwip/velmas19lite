@@ -118,17 +118,27 @@ class ContractController extends Controller{
         $contract->price = $request->price;
         $contract->save();
 
+        //dd($request->block_item);
+
         //Guardamos bloques:
+        $i = 1;
         foreach($request->block_item as $b){
-            $cbslug = Str::slug($b['alias']);
+            $alias = $b['alias']? $b['alias']:'sin nombre';
+            $cbslug = Str::slug($alias);
+
+            $position = $b['position']? $b['position']:$i;
+
+            $father = (isset($b['father']) && $b['father'])? $b['father']:'No';
 
             $cb = new ContractBlocks();
-            $cb->name = $b['alias'];
+            $cb->name = $alias;
             $cb->slug = $cbslug;
             $cb->contract_id = $contract->id;
-            $cb->position = $b['position'];
-            $cb->father = $b['father'];
+            $cb->position = $position;
+            $cb->father = $father;
             $cb->save();
+
+            $i++;
         }
 
         $msg = 'Contrato creado correctamente';
