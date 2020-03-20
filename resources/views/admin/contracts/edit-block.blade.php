@@ -2,10 +2,12 @@
 
 @section('content')
 
-
 <div class="kt-container kt-container--fluid  kt-grid__item kt-grid__item--fluid">
 	<div class="row">
 		<div class="col-lg-3">
+			<a href="{{ route('contracts.edit', $block->contract_id) }}" class="btn btn-info" style="color: #FFF; margin-left: 15px;"></i> Volver</a>
+			<br>
+
 			<label class="col-lg-12 col-form-label">Campos variables</label>
 
 			<form class="kt-form" method="post" action="#" id="frmStoreVariable" accept-charset="utf-8" role="form">
