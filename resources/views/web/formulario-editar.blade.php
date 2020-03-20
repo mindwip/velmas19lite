@@ -21,33 +21,35 @@
                         //Valor de las variables en el contrato del cliente:
                         $values = unserialize($user_contract->variables);
                         @endphp
+        
+                        @if($values)
+                            @foreach($variables as $var)
+                                {{-- Buscamos el valor de la variable en el contrato del cliente --}}
+                                @php
+                                $valor = '';
+                                @endphp
 
-                        @foreach($variables as $var)
-                            {{-- Buscamos el valor de la variable en el contrato del cliente --}}
-                            @php
-                            $valor = '';
-                            @endphp
+                                @foreach($values as $idx => $val)
+                                    @if($idx == $var->id)
+                                        @php
+                                        $valor = $val;
+                                        @endphp    
+                                    @endif
+                                @endforeach
 
-                            @foreach($values as $idx => $val)
-                                @if($idx == $var->id)
-                                    @php
-                                    $valor = $val;
-                                    @endphp    
-                                @endif
+                                <input type="hidden" name="variable_{{ $i }}" value="{{ $var->id }}">
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label>{{ $var->name }} <b>({{ $i }})</b></label>
+                                        <input type="text" class="form-control addVariable" data-indice="{{ $i }}" name="valor_{{ $var->id }}" value="{{ $valor }}">
+                                    </div>    
+                                </div>  
+
+                                @php
+                                $i++;
+                                @endphp  
                             @endforeach
-
-                            <input type="hidden" name="variable_{{ $i }}" value="{{ $var->id }}">
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label>{{ $var->name }} <b>({{ $i }})</b></label>
-                                    <input type="text" class="form-control addVariable" data-indice="{{ $i }}" name="valor_{{ $var->id }}" value="{{ $valor }}">
-                                </div>    
-                            </div>  
-
-                            @php
-                            $i++;
-                            @endphp  
-                        @endforeach
+                        @endif
                                                             
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
