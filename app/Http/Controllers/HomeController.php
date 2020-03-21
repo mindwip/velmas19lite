@@ -171,20 +171,31 @@ class HomeController extends Controller{
             UserContracts::where('sale', $request['referenceCode'])
             ->update(['state' => 1, 'payment_date' => NOW(), 'payment_method' => $request['lapPaymentMethod']]);
 
+            $status = 'ok';
+
+        }else{
+            $status = 'ko';
+        }
+
+        return redirect()->route('confirmation-pago', $status);
+    }
+
+    /**
+     * Página de confirmación de compra.
+     */
+    public function confirmationPago($status){
+        if($status == 'ok'){
             $msg = '<h2 class="text-success">La operación se ha completado con éxito</h2>';
         
         }else{
             $msg = '<h2 class="text-danger">Se ha producido algún problema durante el proceso de pago</h2>';
         }
 
-        return view('web.confirmation')->with(compact('msg'));
+        return view('web.confirmation')->with(compact('msg'));    
     }
 
-    /**
-     * Página de confirmación de compra.
-     */
     public function confirmationPayu(){
-        dd('llega aquí a confirmación');
+
     }
 
     /**

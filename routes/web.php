@@ -27,6 +27,7 @@ Route::get('contratar/{slug}', 'HomeController@addCarrito')->name('contratar');
 Route::get('carrito', 'HomeController@carrito')->name('carrito');
 Route::get('checkout', 'HomeController@checkout')->name('checkout');
 Route::get('response-payu', 'HomeController@responsePayu')->name('response-payu');
+Route::get('confirmation-pago/{status}', 'HomeController@confirmationPago')->name('confirmation-pago');
 Route::get('confirmation-payu', 'HomeController@confirmationPayu')->name('confirmation-payu');
 
 Route::get('delete-contract/{id}', 'HomeController@deleteContract')->name('delete-contract');
