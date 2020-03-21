@@ -46,7 +46,7 @@
 											</thead>
 											<tbody>
 
-												<tr>
+												<!-- <tr>
 													<td>
 														<code>19/3/2019</code>
 													</td>
@@ -73,7 +73,7 @@
 															<i class="icon-file-pdf1"></i>Descargar
 														</a>
 													</td>
-												</tr>
+												</tr> -->
 									
 												@foreach($contracts as $row)
 													<tr>

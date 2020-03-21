@@ -56,6 +56,7 @@ class CustomerController extends Controller{
         $contracts = UserContracts::select('contracts.*')
             ->join('contracts', 'user_contracts.contract_id', '=', 'contracts.id')
             ->where('user_contracts.user_id', Auth::user()->id)
+            ->where('user_contracts.state', 1)
             ->get();
 
         return view('web.cliente')->with(compact('contracts'));	

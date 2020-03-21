@@ -135,10 +135,56 @@ class HomeController extends Controller{
             exit;  
         }
 
+        //Número de venta:
+        if(!session('sale')){
+            $sale = Auth::user()->id.time();
+            \Session::push('sale', $sale);     
+        }  
+
+        //Borramos los registros de la sesión:
+        UserContracts::where('sale', session('sale')[0])->delete();
+
+        foreach (session('contracts') as $row){
+            $contract = Contract::select('price')->find($row);
+
+            $uc = new UserContracts();
+            $uc->user_id = Auth::user()->id;
+            $uc->contract_id = $row;
+            $uc->sale = session('sale')[0];
+            $uc->price = $contract->price;
+            $uc->state = 0;
+            $uc->save(); 
+        }
+
         //Contratos del carrito:
         $contracts = Contract::whereIn('id', session('contracts'))->get();
         
         return view('web.checkout')->with(compact('contracts'));    
+    }
+
+    /**
+     * Página respuesta tras compra.
+     */
+    public function responsePayu(Request $request){
+        //Guardando operación:
+        if($request['message'] == 'APPROVED'){
+            UserContracts::where('sale', $request['referenceCode'])
+            ->update(['state' => 1, 'payment_date' => NOW(), 'payment_method' => $request['lapPaymentMethod']]);
+
+            $msg = '<h2 class="text-success">La operación se ha completado con éxito</h2>';
+        
+        }else{
+            $msg = '<h2 class="text-danger">Se ha producido algún problema durante el proceso de pago</h2>';
+        }
+
+        return view('web.confirmation')->with(compact('msg'));
+    }
+
+    /**
+     * Página de confirmación de compra.
+     */
+    public function confirmationPayu(){
+        dd('llega aquí a confirmación');
     }
 
     /**

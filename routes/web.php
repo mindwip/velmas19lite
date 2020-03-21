@@ -26,6 +26,9 @@ Route::get('formulario-download/{user_contract}', 'CustomerController@downloadCo
 Route::get('contratar/{slug}', 'HomeController@addCarrito')->name('contratar');
 Route::get('carrito', 'HomeController@carrito')->name('carrito');
 Route::get('checkout', 'HomeController@checkout')->name('checkout');
+Route::get('response-payu', 'HomeController@responsePayu')->name('response-payu');
+Route::get('confirmation-payu', 'HomeController@confirmationPayu')->name('confirmation-payu');
+
 Route::get('delete-contract/{id}', 'HomeController@deleteContract')->name('delete-contract');
 Route::get('condiciones-uso', 'HomeController@condicionesUso')->name('condiciones-uso');
 Route::get('politicas-privacidad', 'HomeController@politicasPrivacidad')->name('politicas-privacidad');

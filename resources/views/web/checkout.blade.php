@@ -181,8 +181,37 @@
                         <div class="acctitle"><i class="acc-closed icon-ok-circle"></i><i class="acc-open icon-remove-circle"></i>Paypal</div>
                         <div class="acc_content clearfix">Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus. Aenean lacinia bibendum nulla sed consectetur.</div>
                     </div>
+
+                    @php
+                    //Variables de pago:
+                    $currency = 'COP';
+                    $referenceCode = session('sale')[0];
+                    //$referenceCode = time();
+                    $pre_signature = config('constants.API_KEY_').'~'.config('constants.MERCHANT_ID_').'~'.$referenceCode.'~'.$total.'~'.$currency;
+                    $signature = md5($pre_signature);
+
+
+                    //dd(config('constants.API_KEY_'), config('constants.MERCHANT_ID_'), $referenceCode, $total, $currency, $pre_signature,  $signature);
+                    @endphp
                     
-                    <a href="#" class="button button-3d fright">PAGAR</a>
+                    <form action="{{ config('constants.ACTION_PAYU_') }}" method="post" id="frmChackout" role="form" accept-charset="utf-8">
+                        <input name="merchantId"    type="hidden"  value="{{ config('constants.MERCHANT_ID_') }}">
+                        <input name="accountId"     type="hidden"  value="{{ config('constants.ACCOUNT_ID_') }}">
+                        <input name="description"   type="hidden"  value="Contratos Velmas19lite">
+                        <input name="referenceCode" type="hidden"  value="{{ $referenceCode }}">
+                        <input name="amount"        type="hidden"  value="{{ $total }}">
+                        <input name="tax"           type="hidden"  value="0">
+                        <input name="taxReturnBase" type="hidden"  value="0">
+                        <input name="currency"      type="hidden"  value="{{ $currency }}">
+                        <input name="signature"     type="hidden"  value="{{ $signature }}">
+                        <input name="test"          type="hidden"  value="1">
+                        <input name="buyerFullName" type="hidden"  value="{{ Auth::user()->name }} {{ Auth::user()->surname }}">
+                        <input name="buyerEmail"    type="hidden"  value="{{ Auth::user()->email }}">
+                        <input name="responseUrl"    type="hidden"  value="{{ route('response-payu') }}">
+                        <input name="confirmationUrl"    type="hidden"  value="{{ route('confirmation-payu') }}">
+
+                        <input class="button button-3d fright" type="submit" value="PAGAR">
+                    </form>
                 </div>
             </div>
         </div>
