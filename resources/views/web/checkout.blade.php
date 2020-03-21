@@ -205,8 +205,7 @@
                         <input name="currency"      type="hidden"  value="{{ $currency }}">
                         <input name="signature"     type="hidden"  value="{{ $signature }}">
                         <input name="test"          type="hidden"  value="1">
-                        <input name="buyerFullName" type="hidden"  value="APPROVED">
-                        <!-- {{ Auth::user()->name }} {{ Auth::user()->surname }} -->
+                        <input name="buyerFullName" type="hidden"  value="{{ Auth::user()->name }} {{ Auth::user()->surname }}">
                         <input name="buyerEmail"    type="hidden"  value="{{ Auth::user()->email }}">
                         <input name="responseUrl"    type="hidden"  value="{{ route('response-payu') }}">
                         <input name="confirmationUrl"    type="hidden"  value="{{ route('confirmation-payu') }}">
