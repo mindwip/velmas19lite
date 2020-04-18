@@ -49,7 +49,7 @@ Route::get('logout', 'Auth\LoginController@logout', function (){
 
 
 // BACKEND:  middleware(['auth', 'admin'])->
-Route::prefix('admin')->namespace('Admin')->group(function(){
+Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->group(function(){
 	//Admin / Dashboard:
 	Route::get('/dashboard', 'AdminController@index')->name('admin');
 

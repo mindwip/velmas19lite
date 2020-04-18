@@ -12,7 +12,7 @@
 
 			<form class="kt-form" method="post" action="#" id="frmStoreVariable" accept-charset="utf-8" role="form">
 				{{ csrf_field() }}
-				<input type="hidden" name="block_id" value="{{ $block->id }}">	
+				<input type="hidden" name="contract_id" value="{{ $block->contract_id }}">	
 
 				<div class="row">
 					<label for="type" class="col-lg-12 col-form-label">Tipo de dato:</label>	
@@ -22,6 +22,7 @@
 							<option value="n">Numérico</option>
 							<option value="t">Texto</option>
 							<option value="f">Fecha</option>
+							<option value="b">Si/No</option>
 						</select>
 					</div>
 

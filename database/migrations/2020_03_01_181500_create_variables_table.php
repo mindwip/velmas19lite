@@ -16,8 +16,8 @@ class CreateVariablesTable extends Migration{
             $table->string('name');
             $table->string('type');
             //FK:
-            $table->bigInteger('block_id')->unsigned();
-            $table->foreign('block_id')->references('id')->on('contract_blocks');
+            $table->bigInteger('contract_id')->unsigned();
+            $table->foreign('contract_id')->references('id')->on('contracts');
             $table->softDeletes();
             $table->timestamps();
         });

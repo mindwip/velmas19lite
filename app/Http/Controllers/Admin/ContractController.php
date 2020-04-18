@@ -106,6 +106,8 @@ class ContractController extends Controller{
                 ->withInput();
         }
 
+        //dd($request->all());
+
         //Slug:
         $slug = Str::slug($request->name);
 
@@ -241,7 +243,7 @@ class ContractController extends Controller{
         $subop = $block->name;
         $opActive = 'formularios';
 
-        $variables = Variable::where('block_id', $block->id)->get();
+        $variables = Variable::where('contract_id', $block->contract_id)->get();
 
         return view('admin.contracts.edit-block')->with(compact('op', 'subop', 'opActive', 'block', 'variables'));
     }
@@ -254,7 +256,7 @@ class ContractController extends Controller{
             $v = new Variable();
             $v->name = strtolower($request->name);
             $v->type = $request->type;
-            $v->block_id = $request->block_id;
+            $v->contract_id = $request->contract_id;
             $v->save();
 
             //$msg = 'La variable se ha guardado correctamente';

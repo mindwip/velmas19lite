@@ -97,7 +97,9 @@
 																<i class="icon-legal"></i>Revisar
 															</a>&nbsp;
 
-															<a href="{{ route('formulario-editar', $row->slug) }}" class="button button-mini button-circle button-blue">
+															<!-- <a href="{{ route('formulario-editar', $row->slug) }}" class="button button-mini button-circle button-blue"> -->
+															<!-- <a href="formulario-editar/{{ $row->slug }}" class="button button-mini button-circle button-blue"> -->
+															<a href="{{ route('formulario-editar', $row->id) }}" class="button button-mini button-circle button-blue">
 																<i class="icon-play"></i>Iniciar Contrato
 															</a>&nbsp;
 

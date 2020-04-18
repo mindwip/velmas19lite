@@ -20,36 +20,46 @@
 
                         //Valor de las variables en el contrato del cliente:
                         $values = unserialize($user_contract->variables);
+                        $identificadorVariables = [];
                         @endphp
-        
-                        @if($values)
-                            @foreach($variables as $var)
-                                {{-- Buscamos el valor de la variable en el contrato del cliente --}}
-                                @php
-                                $valor = '';
-                                @endphp
+                        
+                        @foreach($variables as $var)
+                            {{-- Buscamos el valor de la variable en el contrato del cliente --}}
+                            @php
+                            $identificadorVariables[$var->name] = $i;
 
-                                @foreach($values as $idx => $val)
-                                    @if($idx == $var->id)
-                                        @php
-                                        $valor = $val;
-                                        @endphp    
-                                    @endif
-                                @endforeach
+                            $valor = '';
+                            @endphp
 
-                                <input type="hidden" name="variable_{{ $i }}" value="{{ $var->id }}">
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label>{{ $var->name }} <b>({{ $i }})</b></label>
-                                        <input type="text" class="form-control addVariable" data-indice="{{ $i }}" name="valor_{{ $var->id }}" value="{{ $valor }}">
-                                    </div>    
-                                </div>  
-
-                                @php
-                                $i++;
-                                @endphp  
+                            @foreach($values as $idx => $val)
+                                @if($idx == $var->id)
+                                    @php
+                                    $valor = $val;
+                                    @endphp    
+                                @endif
                             @endforeach
-                        @endif
+
+                            <input type="hidden" name="variable_{{ $i }}" value="{{ $var->id }}">
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label>{{ $var->name }} <b>({{ $i }})</b></label>
+
+                                    @if($var->type == 'b')
+                                        <select class="form-control addVariable" data-indice="{{ $i }}" name="valor_{{ $var->id }}">
+                                            <option value="">Selecciona opción</option>
+                                            <option value="si" @if($valor == 'si') selected @endif>Si</option>
+                                            <option value="no" @if($valor == 'no') selected @endif>No</option>
+                                        </select>
+                                    @else
+                                        <input type="text" class="form-control addVariable" data-indice="{{ $i }}" name="valor_{{ $var->id }}" value="{{ $valor }}">
+                                    @endif
+                                </div>    
+                            </div>  
+
+                            @php
+                            $i++;
+                            @endphp  
+                        @endforeach
                                                             
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
@@ -60,7 +70,6 @@
 
                     @php
                     $content = '';
-                    $j = 1;
                     preg_match_all('/\[+[a-zA-Z0-9]+\]/', $user_contract->content, $matches);
                     $arr = [];
                     @endphp
@@ -72,10 +81,9 @@
                         $match1 = substr($match1,1);
                         $match1 = substr($match1,0,-1);
                         
-                        $html = '<span class="variable" data-var="'.$j.'">('.$j.')'.$match1.'</span>';
+                        $html = '<span class="variable" data-var="'.$identificadorVariables[$match1].'">('.$identificadorVariables[$match1].')'.$match1.'</span>';
 
                         array_push($arr, $html);
-                        $j++;
                         @endphp
                     @endforeach 
 
