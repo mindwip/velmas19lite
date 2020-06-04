@@ -176,7 +176,7 @@
             <h2 class="center font-body bottommargin-lg titulos">Selecciona tu contrato</h2>
             <div class="row grid-container" data-layout="masonry" style="overflow: visible">
                 
-                @foreach($contracts as $contract)
+                {{-- @foreach($contracts as $contract)
                     <div class="col-lg-3 mb-3">
                         <div class="flip-card top-to-bottom">
                             <div class="flip-card-front bg-info dark" data-height-xl="200">
@@ -194,6 +194,31 @@
                                     <p class="mb-2 text-white">{{ $contract->description }}</p>
                                     <button type="button" class="btn btn-outline-light mt-2">
                                         <a href="{{ route('formulario', $contract->slug) }}">Contratar</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach --}}
+
+                @foreach($categories as $cat)
+                    <div class="col-lg-3 mb-3">
+                        <div class="flip-card top-to-bottom">
+                            <div class="flip-card-front bg-info dark" data-height-xl="200">
+                                <div class="flip-card-inner">
+                                    <div class="card nobg noborder text-center">
+                                        <div class="card-body">
+                                            <i class="icon-select h1"></i>
+                                            <h3 class="card-title">{{ ucfirst($cat->name) }}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card-back" data-height-xl="200">
+                                <div class="flip-card-inner">
+                                    <p class="mb-2 text-white">{{ $cat->description }}</p>
+                                    <button type="button" class="btn btn-outline-light mt-2">
+                                        <a href="{{ route('categorias', $cat->slug) }}">Contratar</a>
                                     </button>
                                 </div>
                             </div>

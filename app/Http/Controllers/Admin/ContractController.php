@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 //Models:
+use App\Category;
 use App\Contract;
 use App\ContractBlocks;
 use App\Variable;
@@ -89,7 +90,9 @@ class ContractController extends Controller{
         $subop = 'Gestión de formularios';
         $opActive = 'formularios_crear';
 
-        return view('admin.contracts.create')->with(compact('op', 'subop', 'opActive'));
+        $categories = Category::all();
+
+        return view('admin.contracts.create')->with(compact('op', 'subop', 'opActive', 'categories'));
     }
 
      /**
@@ -116,6 +119,7 @@ class ContractController extends Controller{
         $contract->slug = $slug;
         //$contract->author_id = Auth::user()->id;
         $contract->author_id = 1;
+        $contract->category_id = $request->category_id;
         $contract->description = $request->description;
         $contract->price = $request->price;
         $contract->save();
@@ -123,24 +127,26 @@ class ContractController extends Controller{
         //dd($request->block_item);
 
         //Guardamos bloques:
-        $i = 1;
-        foreach($request->block_item as $b){
-            $alias = $b['alias']? $b['alias']:'sin nombre';
-            $cbslug = Str::slug($alias);
+        if($request->block_item){
+            $i = 1;
+            foreach($request->block_item as $b){
+                $alias = $b['alias']? $b['alias']:'sin nombre';
+                $cbslug = Str::slug($alias);
 
-            $position = $b['position']? $b['position']:$i;
+                $position = $b['position']? $b['position']:$i;
 
-            $father = (isset($b['father']) && $b['father'])? $b['father']:'No';
+                $father = (isset($b['father']) && $b['father'])? $b['father']:'No';
 
-            $cb = new ContractBlocks();
-            $cb->name = $alias;
-            $cb->slug = $cbslug;
-            $cb->contract_id = $contract->id;
-            $cb->position = $position;
-            $cb->father = $father;
-            $cb->save();
+                $cb = new ContractBlocks();
+                $cb->name = $alias;
+                $cb->slug = $cbslug;
+                $cb->contract_id = $contract->id;
+                $cb->position = $position;
+                $cb->father = $father;
+                $cb->save();
 
-            $i++;
+                $i++;
+            }
         }
 
         $msg = 'Contrato creado correctamente';
@@ -159,7 +165,9 @@ class ContractController extends Controller{
 
         $blocks = ContractBlocks::where('contract_id', $contract->id)->get();
 
-        return view('admin.contracts.edit')->with(compact('op', 'subop', 'opActive', 'contract', 'blocks'));
+        $categories = Category::all();
+
+        return view('admin.contracts.edit')->with(compact('op', 'subop', 'opActive', 'contract', 'blocks', 'categories'));
     }
 
     /**
@@ -182,21 +190,24 @@ class ContractController extends Controller{
         $contract = Contract::find($request->input('id'));
         $contract->name = $request->name;
         $contract->slug = $slug;
+        $contract->category_id = $request->category_id;
         $contract->description = $request->description;
         $contract->price = $request->price;
         $contract->save();
 
         //Guardamos bloques:
-        foreach($request->block_item as $b){
-            $cbslug = Str::slug($b['alias']);
+        if($request->block_item){
+            foreach($request->block_item as $b){
+                $cbslug = Str::slug($b['alias']);
 
-            $cb = new ContractBlocks();
-            $cb->name = $b['alias'];
-            $cb->slug = $cbslug;
-            $cb->contract_id = $contract->id;
-            $cb->position = $b['position'];
-            $cb->father = $b['father'];
-            $cb->save();
+                $cb = new ContractBlocks();
+                $cb->name = $b['alias'];
+                $cb->slug = $cbslug;
+                $cb->contract_id = $contract->id;
+                $cb->position = $b['position'];
+                $cb->father = $b['father'];
+                $cb->save();
+            }
         }
 
         $msg = 'Contrato actualizado correctamente';

@@ -108,6 +108,7 @@ var KTDatatablesAdvancedColumnRenderingUsuarios = function() {
 		}
 	};
 }();
+
 var KTDatatablesAdvancedColumnRenderingClientes = function() {
 
 	var initTable4 = function() {
@@ -205,6 +206,7 @@ var KTDatatablesAdvancedColumnRenderingClientes = function() {
 		}
 	};
 }();
+
 var KTDatatablesAdvancedColumnRenderingFormularios = function() {
 
 	var initTable2 = function() {
@@ -257,7 +259,6 @@ var KTDatatablesAdvancedColumnRenderingFormularios = function() {
 		}
 	};
 }();
-
 
 var KTDatatablesAdvancedColumnRenderingPagos = function() {
 
@@ -368,4 +369,5 @@ jQuery(document).ready(function() {
 	KTDatatablesAdvancedColumnRenderingPagos.init();
 	KTDatatablesAdvancedColumnRenderingClientes.init();
 	KTDatatablesAdvancedColumnRenderingFormulariosCreados.init();
+	
 });

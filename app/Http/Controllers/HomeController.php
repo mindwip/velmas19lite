@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use PDF;
 
 //Models:
+use App\Category;
 use App\Contract;
 use App\ContractBlocks;
 use App\UserContracts;
@@ -29,9 +30,10 @@ class HomeController extends Controller{
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(){
+        $categories = Category::all();
         $contracts = Contract::where('state', 1)->get();
 
-        return view('home')->with(compact('contracts'));
+        return view('home')->with(compact('categories', 'contracts'));
     }
 
     /**
@@ -204,5 +206,23 @@ class HomeController extends Controller{
     public function contacta(){
         return view('web.contact');    
     }
-    
+
+    /**
+     * Categorias
+     */
+    public function categorias($slug = false){
+        if(!$slug){
+            return redirect('/');
+        }
+
+        $category = Category::where('slug', $slug)->first();
+
+        $contracts = Contract::where('category_id', $category->id)->get();
+
+        if(!$contracts){
+            return redirect('/');
+        }
+
+        return view('web.categorias')->with(compact('contracts', 'category'));
+    }
 }

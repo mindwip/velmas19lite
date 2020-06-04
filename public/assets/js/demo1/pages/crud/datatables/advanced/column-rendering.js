@@ -491,7 +491,7 @@ var KTDatatablesAdvancedColumnRenderingFormulariosCreados = function() {
 						return '<span class="kt-badge ' + status[data].class + ' kt-badge--inline kt-badge--pill">' + status[data].title + '</span>';
 					},
 				},				
-			],
+			]
 		});
 	};
 
@@ -504,7 +504,54 @@ var KTDatatablesAdvancedColumnRenderingFormulariosCreados = function() {
 	};
 }();
 
+var KTDatatablesAdvancedColumnRenderingCategorias = function() {
+	var initTable6 = function() {
+		var table = $('#kt_table_6');
 
+		table.DataTable({
+			"serverSide": false,
+            /*"processing": true,*/
+            "ajax": {
+                "type": "GET",
+                "url": "/api/admin/categories",
+                "error": function(reason){
+                    console.log(reason);
+                }
+            },
+            responsive: true,
+			paging: true,
+			"columns": [
+                {data: 'name'},
+                {data: 'id', className: 'text-right'}
+            ],
+            columnDefs: [
+            	{
+					targets: -1,
+					title: 'Acciones',
+					orderable: false,
+					render: function(data, type, full, meta){
+						//Editar: 
+						var edit = '<a href="/admin/categories/'+full['id']+'/edit" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Editar Datos"><i class="la la-edit"></i></a>';
+
+						//Eliminar:
+						var eliminar = '<a href="/admin/categories/'+full['id']+'/destroy" class="btn btn-sm btn-clean btn-icon btn-icon-md btn-confirm" title="Eliminar Categoría" data-msg="¿Estás seguro de eliminar esta categoría?"><i class="la la-trash"></i></a>';
+
+						return edit+' '+eliminar
+					}
+				}
+
+            ]
+        });
+	};
+
+	return {
+
+		//main function to initiate the module
+		init: function() {
+			initTable6();
+		}
+	};
+}();
 
 jQuery(document).ready(function() {
 	KTDatatablesAdvancedColumnRenderingUsuarios.init();
@@ -512,4 +559,5 @@ jQuery(document).ready(function() {
 	KTDatatablesAdvancedColumnRenderingPagos.init();
 	KTDatatablesAdvancedColumnRenderingClientes.init();
 	KTDatatablesAdvancedColumnRenderingFormulariosCreados.init();
+	KTDatatablesAdvancedColumnRenderingCategorias.init();
 });

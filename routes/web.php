@@ -40,6 +40,8 @@ Route::get('cliente', 'CustomerController@index')->name('cliente');
 Route::post('cliente', 'CustomerController@update')->name('cliente.update');
 Route::post('cliente-password', 'CustomerController@updatePassword')->name('cliente.update-password');
 
+Route::get('categorias/{slug}', 'HomeController@categorias')->name('categorias');
+
 // LOGOUT:
 Route::get('logout', 'Auth\LoginController@logout', function (){
     return abort(404);
@@ -52,6 +54,14 @@ Route::get('logout', 'Auth\LoginController@logout', function (){
 Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->group(function(){
 	//Admin / Dashboard:
 	Route::get('/dashboard', 'AdminController@index')->name('admin');
+
+	//Categories:
+	Route::get('categories', 'CategoryController@index')->name('categories.index');
+	Route::get('categories/create', 'CategoryController@create')->name('categories.create');
+	Route::post('categories/store', 'CategoryController@store')->name('categories.store');
+	Route::get('categories/{category}/edit', 'CategoryController@edit')->name('categories.edit');
+	Route::post('categories/update', 'CategoryController@update')->name('categories.update');
+	Route::get('categories/{category}/destroy', 'CategoryController@destroy')->name('categories.destroy');
 
 	//Contracts:
 	Route::get('contracts', 'ContractController@index')->name('contracts.index');

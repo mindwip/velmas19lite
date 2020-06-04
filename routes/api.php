@@ -18,6 +18,9 @@ use Illuminate\Http\Request;
 }); */
 
 Route::prefix('admin')->namespace('Admin')->group(function(){
+	//Categories:
+	Route::get('categories', 'CategoryController@categoriesApiData');
+
 	//Contracts:
 	Route::get('contracts', 'ContractController@contractsApiData');
 

@@ -41,6 +41,22 @@
 						</div>
 
 						<div class="form-group row">
+							<label for="category_id" class="col-lg-2 col-form-label">Categoría:</label>
+							<div class="col-lg-4">
+								<select name="category_id" class="form-control" required>
+									<option value="">Selecciona categoría</option>
+
+									@foreach($categories as $cat)
+										@php
+										$selected = $cat->id == $contract->category_id? 'selected':'';
+										@endphp
+										<option value="{{ $cat->id }}" {{ $selected }}>{{ $cat->name }}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group row">
 							<label for="description" class="col-lg-2 col-form-label">Descripción:</label>
 							<div class="col-lg-10">
 								<textarea class="form-control" name="description">{{ old('description', $contract->description) }}</textarea>
