@@ -72,10 +72,10 @@
                             <li><a href="#" data-href="#que-es">
                                     <div>¿Qué es Velmas19 Lite?</div>
                                 </a></li>
-                            <li><a href="#" data-href="#section-nextgen">
+                            <li><a href="#" data-href="#section-as-works">
                                     <div>Cómo Funciona</div>
                                 </a>
-                                <ul>
+                                <!-- <ul>
                                     <li><a href="#" data-href="#section-nextgen">
                                             <div>Selecciona Modelo</div>
                                         </a></li>
@@ -89,7 +89,7 @@
                                             <div>Recíbelo automáticamente</div>
                                         </a>
                                     </li>
-                                </ul>
+                                </ul> -->
                             </li>
                         </ul>
                         <ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="160">
@@ -241,7 +241,7 @@
             </div>
         </div>
 
-        <main class="py-4">
+        <main class="py-4_">
             @yield('content')
         </main>
 
@@ -259,8 +259,7 @@
                                     <div class="col-lg-8 bottommargin-sm clearfix">
                                         <img src="{!! asset('admin/assets/media/logos/logo-light.png') !!}" alt="Velmas Logo"
                                             style="display: block;" class="bottommargin-sm">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio,
-                                            consequatur facere molestiae iusto atque.</p>
+                                        <p>En Velmas19 Lite encontrará modelos jurídicos diseñados por profesionales, con la facilidad de poder adaptarlos a sus necesidades.</p>
                                     </div>
                                 </div>
                             </div>

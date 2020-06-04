@@ -5,7 +5,7 @@
 - url: 
 
 ## DEVELOPMENT:
-- url: http://laravel_velmas19.test
+- url: velmas19lite.test
 
 ## BITBUCKET:
 

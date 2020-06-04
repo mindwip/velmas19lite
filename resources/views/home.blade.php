@@ -13,29 +13,30 @@
 @endif
 
 <section id="slider" class="slider-element full-screen slider-parallax">
-    <div class="slider-parallax-inner" style="background: url('demos/app-landing/images/hero/hero.jpg') center center no-repeat; background-size: auto;">
-        <div class="vertical-middle" style="z-index: 2;">
-            <div class="container dark clearfix">
-                <div class="row clearfix">
-                    <div class="col-lg-6 col-md-8">
-                        <div class="emphasis-title">
-                            <h1 class="font-body">Contratos redactados por abogados <br>a un solo click.
-                            </h1>
+    <a href="#" data-scrollto="#section-pricing" data-easing="easeInOutExpo" data-speed="1250" data-offset="160">
+        <div class="slider-parallax-inner" style="background: url('demos/app-landing/images/hero/hero.jpg') center center no-repeat; background-size: cover;">
+            <div class="vertical-middle" style="z-index: 2;">
+                <div class="container dark clearfix">
+                    <div class="row clearfix">
+                        <div class="col-lg-6 col-md-8" style="padding-left: 115px; padding-top: 35%;">
+                            <!-- <div class="emphasis-title">
+                                <h1 class="font-body">Contratos redactados por abogados <br>a un solo click.
+                                </h1>
+                            </div> -->
+                            <a href="#" data-scrollto="#select-contract" data-easing="easeInOutExpo"
+                                data-speed="1250" data-offset="160"
+                                class="btn-banner-home">CONTRATAR</a>
+                            <!--<a href="https://www.youtube.com/watch?v=N_r349riLEE" class="hero-action-link"
+                                data-lightbox="iframe"><i class="icon-play-sign"></i> Watch the Video</a>-->
                         </div>
-                        <a href="#" data-scrollto="#section-pricing" data-easing="easeInOutExpo"
-                            data-speed="1250" data-offset="160"
-                            class="button button-large button-white button-light capitalize"
-                            style="border-radius: 23px;">Contratar</a>
-                        <!--<a href="https://www.youtube.com/watch?v=N_r349riLEE" class="hero-action-link"
-                            data-lightbox="iframe"><i class="icon-play-sign"></i> Watch the Video</a>-->
                     </div>
                 </div>
             </div>
+            <div class="video-wrap" style="position: absolute; height: 100%; z-index: 1;">
+                <div class="video-overlay" style="background: rgba(0,0,0,0.2);"></div>
+            </div>
         </div>
-        <div class="video-wrap" style="position: absolute; height: 100%; z-index: 1;">
-            <div class="video-overlay" style="background: rgba(0,0,0,0.2);"></div>
-        </div>
-    </div>
+    </a>
 </section>
 
 <!-- Content
@@ -47,8 +48,13 @@
                 <h2 class="center font-body bottommargin-lg titulos">¿Qué es Velmas19 Lite?</h2>
                 <div class="row topmargin-sm clearfix">
                     <div class="col-lg-12 col-md-12 bottommargin-sm">
-                        <p class="lead center">En <strong>Velmas19 Lite</strong> encontrarás contratos jurídicos y documentos legales profesionales para adaptarlos a tus necesidades. Puedes personalizar nuestros modelos de contrato de forma sencilla, tan solo respondiendo una serie de preguntas. Para ello, <strong>Velmas19 Lite</strong> pone a tu disposición una selección de los contratos y cláusulas jurídicas de los ámbitos civil, mercantil y laboral, más frecuentes en tu vida personal y profesional.<br>
-                        <strong>Velmas19 Lite</strong> pone a tu alcance las normas jurídicas y ofrece una solución accesible a tus necesidades de información jurídica de calidad. Por fin, un respaldo ágil y profesional en la redacción de tus documentos legales.</p>
+                        <p class="lead center">En <strong>Velmas19</strong> Lite encontrará modelos jurídicos diseñados por profesionales, con la facilidad de poder adaptarlos a sus necesidades. Personalizamos nuestros modelos de contrato,  peticiones o demandas de forma sencilla, con tan solo respondernos una serie de preguntas claves. 
+                        <br>
+                        <strong>Velmas19</strong> Lite pone a su disposición una selección de modelos jurídicos más frecuentes en su vida personal y profesional, útiles en las áreas del derecho civil, mercantil y laboral.
+                        <br>
+                        <strong>Velmas19</strong> Lite pone a su alcance de manera sencilla, rápida y eficiente las normas jurídicas, ofreciendo con ello una solución accesible a sus necesidades de información jurídica de calidad. 
+                        <br>
+                        <strong>Velmas19</strong> Lite, un respaldo ágil y profesional en la redacción de sus modelos jurídicos y legales.</p>
                     </div>
                 </div>
             </div>
@@ -56,7 +62,7 @@
         <div class="clear bottommargin"></div>
 
         <div class="container clearfix">
-            <div class="page-section">
+            <div id="section-as-works" class="page-section">
                 <h2 class="center font-body bottommargin-lg titulos">¿Cómo funciona?</h2>
                 <div class="row topmargin-sm clearfix">
                     <div class="col-lg-12 col-md-12 bottommargin-sm">
@@ -166,7 +172,7 @@
         </div>
         <div class="clear bottommargin"></div>
 
-        <div class="container clearfix">
+        <div class="container clearfix" id="select-contract">
             <h2 class="center font-body bottommargin-lg titulos">Selecciona tu contrato</h2>
             <div class="row grid-container" data-layout="masonry" style="overflow: visible">
                 
@@ -265,62 +271,53 @@
                 <div class="container clearfix">
                     <div class="row topmargin-lg clearfix">
                         <div class="col-lg-4 bottommargin">
-                            <i class="i-plain i-large icon-et-browser inline-block"
+                            <i class="i-plain i-large icon-et-cloud inline-block"
                                 style="margin-bottom: 30px; color: #999;"></i>
                             <div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-                                <h4 style="font-size: 16px;">Cross Browser</h4>
+                                <h4 style="font-size: 16px;">Flexible</h4>
                             </div>
-                            <p class="" style="line-height: 26px;">Canvas 4 Loads Faster &amp; Smoother than
-                                the
-                                Previous Versions providing an Optimal Experience for your Users.</p>
+                            <p class="" style="line-height: 26px;">Nuestra aplicación se diseño con el objetivo de ser extremadamente fácil y flexible, podrá modificar los medelos a través de preguntas guias. En cualquier momento puede acceder a ella y encontrar de manera rápida el modelo jurídico que requiere. </p>
                         </div>
                         <div class="col-lg-4 bottommargin">
                             <i class="i-plain i-large icon-et-adjustments inline-block"
                                 style="margin-bottom: 30px; color: #999;"></i>
                             <div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-                                <h4 style="font-size: 16px;">Flexible Options</h4>
+                                <h4 style="font-size: 16px;">Fácil</h4>
                             </div>
-                            <p class="" style="line-height: 26px;">Unleash the Power of Mega Menus by adding
-                                Widgets &amp; Mixed Columns powered by the Bootstrap Grid.</p>
+                            <p class="" style="line-height: 26px;">Nuestra aplicación le proporciona la mejor experiencia tecnológica, optimizando y facilitando al usuario la búsqueda de PQRs o modelo jurídico adecuado para tu necesidad. </p>
                         </div>
                         <div class="col-lg-4 bottommargin">
-                            <i class="i-plain i-large icon-et-calendar inline-block"
+                            <i class="i-plain i-large icon-et-laptop inline-block"
                                 style="margin-bottom: 30px; color: #999;"></i>
                             <div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-                                <h4 style="font-size: 16px;">Scheduled Backups</h4>
+                                <h4 style="font-size: 16px;">Tecnología confiable</h4>
                             </div>
-                            <p class="" style="line-height: 26px;">Amazing set of New Components giving you
-                                Opportunity to Create an Interactive Website for your Business.</p>
+                            <p class="" style="line-height: 26px;">Los avances tecnológicos son herramientas útiles y necesarias para progresar en cualquier área, con nuestra aplicación tiene la confianza de poder acceder y encontrar el modelo jurídico - legal útil cubrir rápidamente lo que solicitas.</p>
                         </div>
                         <div class="col-lg-4 bottommargin">
-                            <i class="i-plain i-large icon-et-desktop inline-block"
+                            <i class="i-plain i-large icon-et-basket inline-block"
                                 style="margin-bottom: 30px; color: #999;"></i>
                             <div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-                                <h4 style="font-size: 16px;">Responsive Ready</h4>
+                                <h4 style="font-size: 16px;">Facilidad de pago</h4>
                             </div>
-                            <p class="" style="line-height: 26px;">Convert any Grid to an Isotope Grid
-                                easily
-                                with Filterable Options making it extremely flexible and powerful.</p>
+                            <p class="" style="line-height: 26px;">Un avanico de metodos de pagos disponibles para su comodidad.</p>
                         </div>
                         <div class="col-lg-4 bottommargin">
-                            <i class="i-plain i-large icon-et-bargraph inline-block"
+                            <i class="i-plain i-large icon-et-profile-female inline-block"
                                 style="margin-bottom: 30px; color: #999;"></i>
                             <div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-                                <h4 style="font-size: 16px;">Increased Conversions</h4>
+                                <h4 style="font-size: 16px;">Personalizado y rápido</h4>
                             </div>
-                            <p class="" style="line-height: 26px;">Display an Alternate Lighter Menu on
-                                Responsive Devices with the same Markup Code as before. Awesomely Useful.
+                            <p class="" style="line-height: 26px;">Nuestro usuario cuenta con un espacio ‘online’ desde donde puede obtener una gama de modelos jurídicos diseñados por profesionales, y de una forma rápida obtener el modelo  personalizado conforme a los datos que usted le suministra. 
                             </p>
                         </div>
                         <div class="col-lg-4 bottommargin">
-                            <i class="i-plain i-large icon-et-cloud inline-block"
+                            <i class="i-plain i-large icon-et-gears inline-block"
                                 style="margin-bottom: 30px; color: #999;"></i>
                             <div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-                                <h4 style="font-size: 16px;">Cloud Sharing</h4>
+                                <h4 style="font-size: 16px;">Funcional</h4>
                             </div>
-                            <p class="" style="line-height: 26px;">Added SPAM Protection for your Precious
-                                Forms
-                                so that you receive Emails only from Authentic Real Users.</p>
+                            <p class="" style="line-height: 26px;">Nuestra aplicación es un potente canal en el mundo de los negocios, es funcional, rápida y confiable, proporcionando de manera muy sencilla el modelo ajustable a sus necesidades  jurídicas y legales.</p>
                         </div>
                     </div>
                 </div>
