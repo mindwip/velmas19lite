@@ -52,4 +52,4 @@
 	</div>
 </section>
 
-@endsection
+@endsection<div class="row grid-container" data-layout="masonry" style="overflow: visible">

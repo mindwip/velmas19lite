@@ -23,12 +23,22 @@
 							<option value="t">Texto</option>
 							<option value="f">Fecha</option>
 							<option value="b">Si/No</option>
+							<option value="p">Pregunta</option>
 						</select>
 					</div>
 
-					<label for="name" class="col-lg-12 col-form-label">Nombre:</label>	
-					<div class="col-lg-12">
-						<input type="text" name="name" id="tipoNombre" class="form-control" required disabled>
+					<div class="bloqueNombre">
+						<label for="name" class="col-lg-12 col-form-label">Nombre:</label>	
+						<div class="col-lg-12">
+							<input type="text" name="name" id="tipoNombre" class="form-control" required disabled>
+						</div>
+					</div>
+
+					<div class="bloqueRespuestas">
+						<label for="answer" class="col-lg-12 col-form-label">Respuestas: <button class="btnAddAnswer" title="Añade respuesta">&#43;</button></label>
+						<div class="col-lg-12 respuestas">
+							
+						</div>	
 					</div>
 
 					<div class="col-lg-6">
@@ -111,8 +121,15 @@ $(document).ready(function(){
 
     $('#tipoTipo').on('change', function(){
     	var option = $(this).val();
-    	if(option != ''){
-    		$('#tipoNombre').attr('disabled', false);
+    	$('#tipoNombre').attr('disabled', false);
+    	if(option == 'p'){
+    		var html = '<input type="text" name="answer[]" class="form-control" placeholder="Añade respuesta">';
+
+    		$('.respuestas').append(html);
+    		$('.bloqueRespuestas').fadeIn();
+    	}else{
+    		$('.bloqueRespuestas').fadeOut();
+    		$('.respuestas').empty();
     	}
     });
 
@@ -127,6 +144,9 @@ $(document).ready(function(){
             cache: false,
             datatype: "JSON",
             success: function(response){
+            	$('.respuestas').empty();
+            	$('#tipoNombre').val('');
+
             	var html = '<tr class="tr-'+response.id+'">';
             		html += '<td>'+response.name+'</td>';
             		html += '<td class="text-right"><a href="3" data-id="'+response.id+'" class="btnDeleteVariable" data-msg="¿Estás seguro de eliminar esta variable?"><i class="la la-trash-o"></i></a></td>';
@@ -151,6 +171,14 @@ $(document).ready(function(){
         }else{
             return false;
         }
+    });
+
+    //Añadir respuesta:
+    $('.btnAddAnswer').on('click', function(e){
+    	e.preventDefault();
+    	var html = '<input type="text" name="answer[]" class="form-control" placeholder="Añade respuesta" style="margin-top:5px;">';
+
+    	$('.respuestas').append(html);
     });
 });
 </script>

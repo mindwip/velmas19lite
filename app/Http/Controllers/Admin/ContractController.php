@@ -264,8 +264,17 @@ class ContractController extends Controller{
      */
     public function storeVariable(Request $request){
         if($request->ajax()){ 
+
+            //dd($request->all());
+
             $v = new Variable();
-            $v->name = strtolower($request->name);
+            $v->name = Str::slug($request->name);
+
+            if($request->type == 'p' && $request->answer){
+                $values = serialize($request->answer);
+                $v->values = $values;
+            }
+
             $v->type = $request->type;
             $v->contract_id = $request->contract_id;
             $v->save();

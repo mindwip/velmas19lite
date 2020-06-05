@@ -14,6 +14,7 @@ class CreateVariablesTable extends Migration{
         Schema::create('variables', function (Blueprint $table){
             $table->bigIncrements('id');
             $table->string('name');
+            $table->text('values')->nullable();
             $table->string('type');
             //FK:
             $table->bigInteger('contract_id')->unsigned();

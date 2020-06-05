@@ -158,7 +158,7 @@ class CustomerController extends Controller{
         }
 
         //Variables del formulario:
-        $variables = Variable::select('variables.id', 'variables.name', 'variables.type')
+        $variables = Variable::select('variables.id', 'variables.name', 'variables.values', 'variables.type')
         ->join('contract_blocks', 'variables.contract_id', '=', 'contract_blocks.contract_id')
         ->where('contract_blocks.contract_id', $user_contract->contract_id)
         ->groupBy('variables.id')
@@ -173,6 +173,7 @@ class CustomerController extends Controller{
      * Actualizar contrato de cliente.
      */
     public function updateContract(Request $request){
+        //dd($request->all());
         $campos_recibidos = (count($request->all()) - 2) / 2;
         $serie = [];
 

@@ -104,5 +104,22 @@ select.form-control:not([size]):not([multiple]){
 .invalid-feedback{
     display: block !important;
 }
+
+.bloqueRespuestas{
+    display: none;
+}
     
-  
+.btnAddAnswer{
+    background-color: #F6BA39;
+    border: none;
+    border-radius: 50%;
+    color: #FFF;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    height: 26px;
+    line-height: 26px;
+    margin-left: 46px;
+    text-align: center;
+    width: 26px;
+}
