@@ -97,6 +97,10 @@ p>strong{color:#412da4}
     padding: 10px 20px;
 }
 
+.invalid-feedback{
+    display: block !important;
+}
+
 
 
 

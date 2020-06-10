@@ -3150,7 +3150,7 @@ var SEMICOLON = SEMICOLON || {};
 			});
 		},
 
-		ajaxForm: function(){
+		/*ajaxForm: function(){
 
 			if( !$().validate ) {
 				console.log('ajaxForm: Form Validate not Defined.');
@@ -3285,7 +3285,7 @@ var SEMICOLON = SEMICOLON || {};
 				});
 
 			});
-		},
+		},*/
 
 		subscription: function(){
 

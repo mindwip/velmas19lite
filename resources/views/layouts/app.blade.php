@@ -346,7 +346,7 @@
     ============================================= -->
     <script src="{{ asset('js/functions.js') }}"></script>
     <script>
-    jQuery(document).ready(function ($){
+    /*jQuery(document).ready(function ($){
 
         function pricingSwitcher(elementCheck, elementParent, elementPricing) {
             elementParent.find('.pts-left,.pts-right').removeClass('pts-switch-active');
@@ -429,8 +429,8 @@
         $('[data-pricing-plan]').click(function () {
             getStartedForm.find('#get-started-form-package').val($(this).attr('data-pricing-plan'));
             getStartedForm.find('#modal-get-started-package').html($(this).attr('data-pricing-plan'));
-        });
-    });
+        }); 
+    });*/
     </script>
 
 </body>

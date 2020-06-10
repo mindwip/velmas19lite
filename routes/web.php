@@ -35,6 +35,7 @@ Route::get('condiciones-uso', 'HomeController@condicionesUso')->name('condicione
 Route::get('politicas-privacidad', 'HomeController@politicasPrivacidad')->name('politicas-privacidad');
 Route::get('politicas-cookies', 'HomeController@politicasCookies')->name('politicas-cookies');
 Route::get('contacta', 'HomeController@contacta')->name('contacta');
+Route::post('contacto', 'HomeController@contacto')->name('contacto');
 
 Route::get('cliente', 'CustomerController@index')->name('cliente');
 Route::post('cliente', 'CustomerController@update')->name('cliente.update');

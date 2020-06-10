@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use PDF;
 
 //Models:
@@ -15,6 +17,8 @@ use App\UserContracts;
 use App\Variable;
 
 class HomeController extends Controller{
+    private $company_email = 'servicios@velmas19.com';
+
     /**
      * Create a new controller instance.
      *
@@ -22,6 +26,18 @@ class HomeController extends Controller{
      */
     public function __construct(){
         //$this->middleware('auth');
+    }
+
+    /**
+     * Validator
+     */
+    protected function validator(array $data){
+        return Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255|email',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string|max:5000'
+        ]);
     }
 
     /**
@@ -205,6 +221,31 @@ class HomeController extends Controller{
      */
     public function contacta(){
         return view('web.contact');    
+    }
+
+    /**
+     * Enviar formulario de contacto:
+     */
+    public function contacto(Request $request){
+        $validator = $this->validator($request->all());
+        if($validator->fails()){
+            return redirect('contacta')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $emailFrom = $request->email;
+        $emailTo = $this->company_email;
+        $data['usuario'] = $request;
+
+        Mail::send('emails.send-contact', $data, function($message) use($emailFrom, $emailTo, $request){
+            $message->from($emailFrom, $request->name);
+            $message->to($emailTo);
+            $message->subject('Contacto de '.$request->name.'. '.$request->subject); 
+        }); 
+
+        $msg = 'El email ha sido enviado correctamente. Te responderemos a la mayor brevedad';
+        return redirect()->route('contacta')->with(compact('msg'));
     }
 
     /**

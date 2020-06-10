@@ -21,31 +21,72 @@
     <div class="content-wrap">
         <div class="container clearfix">
             <div class="postcontent nobottommargin">
+                <!-- Warnings: -->
+                @if(session('msg'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('msg') }}
+                    </div>
+                    <br>
+                @endif
+                @if(session('alert'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('alert') }}
+                    </div>
+                    <br>
+                @endif
+
                 <h3>Contacto con nosotros si necesitas más información</h3>
                 <div class="form-widget">
                     <div class="form-result"></div>
-                    <form class="nobottommargin" id="template-contactform" name="template-contactform" action="include/form.php" method="post" novalidate="novalidate">
+                    <form class="nobottommargin" action="{{ route('contacto') }}" method="post" role="form" id="frmContact">
+                        {{ csrf_field() }}
+
                         <div class="form-process"></div>
                         <div class="col_one_third">
                             <label for="template-contactform-name">Nombre <small>*</small></label>
-                            <input type="text" id="template-contactform-name" name="template-contactform-name" value="" class="sm-form-control required" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+                            <!-- <input type="text" id="template-contactform-name" name="name" value="{{ old('name') }}" class="sm-form-control required" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;" maxlength="100"> -->
+                            <input type="text" id="template-contactform-name" name="name" value="{{ old('name') }}" class="sm-form-control" maxlength="100" autocomplete="off" required>
+
+                            @if($errors->has('name'))
+                                <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $errors->first('name') }}</strong>
+                                </span>
+                            @endif
                         </div>
                         <div class="col_one_third">
                             <label for="template-contactform-email">Email <small>*</small></label>
-                            <input type="email" id="template-contactform-email" name="template-contactform-email" value="" class="required email sm-form-control">
+                            <input type="email" id="template-contactform-email" name="email" value="{{ old('email') }}" class="email sm-form-control" maxlength="150" required>
+
+                            @if($errors->has('email'))
+                                <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif
                         </div>
                         <div class="col_one_third col_last">
                             <label for="template-contactform-phone">Teléfono</label>
-                            <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="sm-form-control">
+                            <input type="text" id="template-contactform-phone" name="phone" value="{{ old('phone') }}" class="sm-form-control" maxlength="15">
+
+                            @if($errors->has('phone'))
+                                <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $errors->first('phone') }}</strong>
+                                </span>
+                            @endif
                         </div>
                         <div class="clear"></div>
                         <div class="col_two_third">
                             <label for="template-contactform-subject">Asunto <small>*</small></label>
-                            <input type="text" id="template-contactform-subject" name="subject" value="" class="required sm-form-control">
+                            <input type="text" id="template-contactform-subject" name="subject" value="{{ old('subject') }}" class="sm-form-control" maxlength="250" required>
+
+                            @if($errors->has('subject'))
+                                <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $errors->first('subject') }}</strong>
+                                </span>
+                            @endif
                         </div>
                         <div class="col_one_third col_last">
                             <label for="template-contactform-service">Servicios</label>
-                            <select id="template-contactform-service" name="template-contactform-service" class="sm-form-control">
+                            <select id="template-contactform-service" name="service" class="sm-form-control">
 								<option value="">-- Selecciona uno --</option>
 								<option value="Wordpress">Contacto General</option>
 								<option value="PHP / MySQL">Facturación</option>
@@ -54,14 +95,22 @@
                         </div>
                         <div class="clear"></div>
                         <div class="col_full">
-                            <label for="template-contactform-message">Mensaje <small>*</small></label>
-                            <textarea class="required sm-form-control" id="template-contactform-message" name="template-contactform-message" rows="6" cols="30"></textarea>
+                            <label for="message">Mensaje <small>*</small></label>
+                            <textarea class="sm-form-control" id="message" name="message" rows="6" cols="30" required>{{ old('message') }}</textarea>
+
+                            @if($errors->has('message'))
+                                <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $errors->first('message') }}</strong>
+                                </span>
+                            @endif
                         </div>
                         <div class="col_full hidden">
                             <input type="text" id="template-contactform-botcheck" name="template-contactform-botcheck" value="" class="sm-form-control">
                         </div>
                         <div class="col_full">
-                            <button class="button button-3d nomargin" type="submit" id="template-contactform-submit" name="template-contactform-submit" value="submit">Contactar</button>
+                            <!-- <input class="button button-3d nomargin" type="submit" value="Contactar"> -->
+
+                            <button type="submit" class="button button-3d nomargin">Contactar</button>
                         </div>
                         <input type="hidden" name="prefix" value="template-contactform-">
                     </form>
