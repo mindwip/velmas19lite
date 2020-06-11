@@ -124,6 +124,7 @@ $(document).ready(function(){
     	$('#tipoNombre').attr('disabled', false);
     	if(option == 'p'){
     		var html = '<input type="text" name="answer[]" class="form-control" placeholder="Añade respuesta">';
+    		html += '<textarea class="form-control" name="texto[]" placeholder="texto de la respuesta"></textarea>';
 
     		$('.respuestas').append(html);
     		$('.bloqueRespuestas').fadeIn();
@@ -177,6 +178,7 @@ $(document).ready(function(){
     $('.btnAddAnswer').on('click', function(e){
     	e.preventDefault();
     	var html = '<input type="text" name="answer[]" class="form-control" placeholder="Añade respuesta" style="margin-top:5px;">';
+    	html += '<textarea class="form-control" name="texto[]" placeholder="texto de la respuesta"></textarea>';
 
     	$('.respuestas').append(html);
     });

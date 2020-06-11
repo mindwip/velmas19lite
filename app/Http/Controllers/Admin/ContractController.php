@@ -273,6 +273,9 @@ class ContractController extends Controller{
             if($request->type == 'p' && $request->answer){
                 $values = serialize($request->answer);
                 $v->values = $values;
+
+                $textos = serialize($request->texto);
+                $v->texto = $textos;
             }
 
             $v->type = $request->type;
