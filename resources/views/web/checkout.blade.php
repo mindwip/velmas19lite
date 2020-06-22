@@ -139,7 +139,7 @@
 	                                        <a target="_blank" href="{{ route('formulario', $row->slug) }}">{{ $row->name }}</a>
 	                                    </td>
 	                                    <td class="cart-product-subtotal">
-	                                        <span class="amount">{{ $row->price }}COL$</span>
+	                                        <span class="amount">{{ $row->price }}COP$</span>
 	                                    </td>
 	                                </tr>   
 
@@ -164,7 +164,7 @@
                                     </td>
 
                                     <td class="cart-product-name">
-                                        <span class="amount color lead"><strong>{{ $total }}COL$</strong></span>
+                                        <span class="amount color lead"><strong>{{ $total }}COP$</strong></span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -172,8 +172,13 @@
                     </div>
 
                     <div class="accordion clearfix">
-                        <div class="acctitle"><i class="acc-closed icon-ok-circle"></i><i class="acc-open icon-remove-circle"></i>Direct Bank Transfer</div>
-                        <div class="acc_content clearfix">Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</div>
+                       <!--  <div class="acctitle"><i class="acc-closed icon-ok-circle"></i><i class="acc-open icon-remove-circle"></i>Direct Bank Transfer</div>
+                        <div class="acc_content clearfix">Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</div> -->
+
+                        <div class="acctitle"><i class="acc-closed icon-ok-circle"></i><i class="acc-open icon-remove-circle"></i>
+                            <img src="{!! asset('img/payu-logo.png') !!}" alt="PayU" style="margin-top: -5px; width: 40px;">
+                        </div>
+                        <div class="acc_content clearfix">Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus. Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.</div>
 
                         <div class="acctitle"><i class="acc-closed icon-ok-circle"></i><i class="acc-open icon-remove-circle"></i>Cheque Payment</div>
                         <div class="acc_content clearfix">Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus. Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.</div>
@@ -200,10 +205,12 @@
                         <input name="description"   type="hidden"  value="Contratos Velmas19lite">
                         <input name="referenceCode" type="hidden"  value="{{ $referenceCode }}">
                         <input name="amount"        type="hidden"  value="{{ $total }}">
+                        <!-- <input name="amount"        type="hidden"  value="3"> -->
                         <input name="tax"           type="hidden"  value="0">
                         <input name="taxReturnBase" type="hidden"  value="0">
                         <input name="currency"      type="hidden"  value="{{ $currency }}">
                         <input name="signature"     type="hidden"  value="{{ $signature }}">
+                        <!-- <input name="signature"     type="hidden"  value="ba9ffa71559580175585e45ce70b6c37"> -->
                         <input name="test"          type="hidden"  value="1">
                         <input name="buyerFullName" type="hidden"  value="{{ Auth::user()->name }} {{ Auth::user()->surname }}">
                         <input name="buyerEmail"    type="hidden"  value="{{ Auth::user()->email }}">

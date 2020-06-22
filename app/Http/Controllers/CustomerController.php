@@ -158,7 +158,7 @@ class CustomerController extends Controller{
         }
 
         //Variables del formulario:
-        $variables = Variable::select('variables.id', 'variables.name', 'variables.values', 'variables.type')
+        $variables = Variable::select('variables.id', 'variables.name', 'variables.values', 'variables.texto', 'variables.type')
         ->join('contract_blocks', 'variables.contract_id', '=', 'contract_blocks.contract_id')
         ->where('contract_blocks.contract_id', $user_contract->contract_id)
         ->groupBy('variables.id')

@@ -6,6 +6,7 @@
 
 ## DEVELOPMENT:
 - url: velmas19lite.test
+- url_backend: http://velmas19lite.test/admin/dashboard
 
 ## BITBUCKET:
 
@@ -77,6 +78,36 @@ En el archivo config/constants.php se definen constantes personalizadas.
 - 03-12-2020: en el archivo .env se modifica CACHE_DRIVER=file por CACHE_DRIVER=array
 
 - 27-01-2020: en config/database.php se modifica en el objeto 'mysql' el parámetro 'strict' de true a false. De este modo logramos que funcionen las sentencias groupBy en las consultas mysql.
+
+## CONFIGURACIÓN EMAILS:
+En el archivo .env, completar los valores correctos de las siguientes variables de entorno:
+
+MAIL_DRIVER=smtp
+MAIL_HOST=
+MAIL_PORT=2525
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=null
+MAIL_FROM_NAME="${APP_NAME}"
+
+## PAYU:
+- url developers: http://developers.payulatam.com/es/web_checkout/integration.html
+
+## PAYU SANDBOX:
+- marca: Mastercard
+- credit card: 5216362296965018
+- vencimiento: 09/21
+- cvv: 284
+
+## PAYU PRODUCTION:
+En el archivo config/constants:
+- activar la variable ACTION_PAYU_ de producción, y desactivar la de sandbox
+- indicar los valores de producción para las siguientes variables:
+	'MERCHANT_ID_' => '',
+	'ACCOUNT_ID_' => '',
+	'API_KEY_' => '',
+	'API_LOGIN_' => ''
 
 		
 ## About Laravel

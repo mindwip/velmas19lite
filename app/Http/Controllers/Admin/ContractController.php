@@ -265,8 +265,6 @@ class ContractController extends Controller{
     public function storeVariable(Request $request){
         if($request->ajax()){ 
 
-            //dd($request->all());
-
             $v = new Variable();
             $v->name = Str::slug($request->name);
 
@@ -287,6 +285,38 @@ class ContractController extends Controller{
             
             return response()->json($v);
         }
+    }
+
+    /**
+     * Editar variable.
+     */
+    public function editVariable(Variable $variable, $block){
+        $op = 'Editar variable';
+        $subop = $variable->name;
+        $opActive = 'formularios';
+
+        return view('admin.contracts.edit-variable')->with(compact('op', 'subop', 'opActive', 'block', 'variable'));
+    }
+
+    /**
+     * Actualizar variable.
+     */
+    public function updateVariable(Request $request){
+        $v = Variable::find($request->id);
+        //$v->name = Str::slug($request->name);
+
+        if($v->type == 'p' && $request->values){
+            $values = serialize($request->values);
+            $v->values = $values;
+
+            $textos = serialize($request->texto);
+            $v->texto = $textos;
+
+            $v->save();
+        }
+
+        $msg = 'La variable se ha guardado correctamente';
+        return redirect()->route('contracts.edit-variable',  [$v->id, $request->block_id])->with(compact('msg'));
     }
 
     /**

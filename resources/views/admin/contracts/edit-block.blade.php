@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="kt-container kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+<div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid">
 	<div class="row">
 		<div class="col-lg-3">
 			<a href="{{ route('contracts.edit', $block->contract_id) }}" class="btn btn-info" style="color: #FFF; margin-left: 15px;"></i> Volver</a>
@@ -61,6 +61,12 @@
 								<tr class="tr-{{ $var->id }}">
 									<td>{{ $var->name }}</td>
 									<td class="text-right">
+										@if($var->type == 'p')
+											<a href="{{ route('contracts.edit-variable', [$var->id, $block->id]) }}">
+												<i class="la la-edit"></i>
+											</a>
+										@endif
+
 										<a href="#" data-id="{{ $var->id }}" class="btnDeleteVariable" data-msg="¿Estás seguro de eliminar esta variable?">
 											<i class="la la-trash-o"></i>
 										</a>

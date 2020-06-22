@@ -50,10 +50,10 @@
 	                            </td>
 
 	                            <td class="cart-product-price">
-	                                <span class="amount">{{ $row->price }}COL$</span>
+	                                <span class="amount">{{ $row->price }}COP$</span>
 	                            </td>        
 	                            <td class="cart-product-subtotal">
-	                                <span class="amount">{{ $row->price }}COL$</span>
+	                                <span class="amount">{{ $row->price }}COP$</span>
 	                            </td>
 	                        </tr>
 
@@ -94,7 +94,7 @@
                                     </td>
 
                                     <td class="cart-product-name">
-                                        <span class="amount">{{ $total }}COL$</span>
+                                        <span class="amount">{{ $total }}COP$</span>
                                     </td>
                                 </tr>                                               
                                 <tr class="cart_item">
@@ -102,7 +102,7 @@
                                         <strong>Total</strong>
                                     </td>        
                                     <td class="cart-product-name">
-                                        <span class="amount color lead"><strong>{{ $total }}COL$</strong></span>
+                                        <span class="amount color lead"><strong>{{ $total }}COP$</strong></span>
                                     </td>
                                 </tr>
                             </tbody>

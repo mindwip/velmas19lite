@@ -17,8 +17,6 @@ use App\UserContracts;
 use App\Variable;
 
 class HomeController extends Controller{
-    private $company_email = 'servicios@velmas19.com';
-
     /**
      * Create a new controller instance.
      *
@@ -181,14 +179,11 @@ class HomeController extends Controller{
     }
 
     /**
-     * Página respuesta tras compra.
+     * Recibiendo respuesta tras compra.
      */
     public function responsePayu(Request $request){
-        //Guardando operación:
-        if($request['message'] == 'APPROVED'){
-            UserContracts::where('sale', $request['referenceCode'])
-            ->update(['state' => 1, 'payment_date' => NOW(), 'payment_method' => $request['lapPaymentMethod']]);
-
+        //Redirigiendo al usuario:
+        if($request['transactionState'] == 4){
             $status = 'ok';
 
         }else{
@@ -213,7 +208,27 @@ class HomeController extends Controller{
     }
 
     public function confirmationPayu(){
+        //Guardando operación:
+        if($request['transactionState'] == 4){
+            UserContracts::where('sale', $request['referenceCode'])
+            ->update(['state' => 1, 'payment_date' => NOW(), 'payment_method' => $request['lapPaymentMethod']]);
 
+            $emailFrom = config('constants.EMAIL_');
+            $emailTo = Auth::user()->email;
+            $data['usuario'] = Auth::user();
+            //Contratos del carrito:
+            $data['contracts'] = Contract::whereIn('id', session('contracts'))->get();
+
+            Mail::send('emails.confirm-purchase', $data, function($message) use($emailFrom, $emailTo){
+                $message->from($emailFrom, 'Velmas19 Lite');
+                $message->to($emailTo);
+                $message->subject('Confirmación de compra'); 
+            }); 
+
+        }else{
+            $status = 'ko';   
+            return redirect()->route('confirmation-pago', $status); 
+        }
     }
 
     /**
@@ -235,7 +250,7 @@ class HomeController extends Controller{
         }
 
         $emailFrom = $request->email;
-        $emailTo = $this->company_email;
+        $emailTo = config('constants.EMAIL_');
         $data['usuario'] = $request;
 
         Mail::send('emails.send-contact', $data, function($message) use($emailFrom, $emailTo, $request){

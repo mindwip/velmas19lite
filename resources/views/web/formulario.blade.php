@@ -39,14 +39,35 @@
 					@endforeach
 
 					<div class="divider"></div>
-					<a href="{{ route('contratar', $contract->slug) }}" class="button button-desc button-dark button-rounded">
-						<div>Proceder con el pago</div><span>He leído y cumplo las condiciones del
-							contrato</span>
+					<input type="checkbox" class="form-control mr-2 chkAccept" style="display: inline-block; height: 16px; width: 16px;">
+					<a target="_blank" href="{{ route('condiciones-uso') }}" style="color: #8071b9;">He leído y cumplo las condiciones del contrato</a>
+					<br>
+					<a href="{{ route('contratar', $contract->slug) }}" class="button button-desc button-dark button-rounded mt-2 btnAcceptConditions" style="margin-left: 0;">
+						Proceder con el pago
 					</a>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
+
+@push('scripts')
+<script>
+$(document).ready(function(){
+	$('.btnAcceptConditions').on('click', function(e){
+		e.preventDefault();
+		if($('.chkAccept').is(':checked')){
+			var url = $('.btnAcceptConditions').prop('href');
+			window.location.href = url;
+
+		}else{
+			$('.alertConditions').remove();
+			$('<span style="color: #C55; line-height: 22px;" class="alertConditions">Debes aceptar las condiciones antes de continuar<br></span>').insertBefore('.btnAcceptConditions');
+			return false;
+		}
+	});
+});
+</script>
+@endpush
 
 @endsection

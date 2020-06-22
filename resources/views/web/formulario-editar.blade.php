@@ -20,82 +20,102 @@
 
                         //Valor de las variables en el contrato del cliente:
                         $values = unserialize($user_contract->variables);
+
+                        //dd($values);
                         $identificadorVariables = [];
                         $identificadorValues = [];
+                        $identificadorTextos = [];
                         $arrValuesMultiple = [];
 
                         //dd($variables);
                         @endphp
                         
-                        @foreach($variables as $var)
-                            {{-- Buscamos el valor de la variable en el contrato del cliente --}}
-                            @php
-                            $identificadorVariables[$var->name] = $i;
-                            $identificadorValues[$var->name] = $var->values;
+                        @if($variables)
+                            @foreach($variables as $var)
+                                {{-- Buscamos el valor de la variable en el contrato del cliente --}}
+                                @php
+                                $identificadorVariables[$var->name] = $i;
+                                $identificadorValues[$var->name] = $var->values? $var->values:'';
+                                $identificadorTextos[$var->name] = $var->texto? $var->texto:'';
 
-                            /*if($var->name == 'pregunta-3'){
-                                dd($var->name, $var->values, $identificadorValues[$var->name]);
-                            }*/
-                            
+                                $valor = '';
+                                @endphp
 
-                            $valor = '';
-                            @endphp
-
-                            @foreach($values as $idx => $val)
-                                @if($idx == $var->id)
-                                    @php
-                                    $valor = $val;
-                                    @endphp    
-                                @endif
-                            @endforeach
-
-                            <input type="hidden" name="variable_{{ $i }}" value="{{ $var->id }}">
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label>{{ $var->name }} <b>({{ $i }})</b></label>
-
-                                    <!-- Para booleano -->
-                                    @if($var->type == 'b')
-                                        <select class="form-control addVariable" data-indice="{{ $i }}" name="valor_{{ $var->id }}">
-                                            <option value="">Selecciona opción</option>
-                                            <option value="si" @if($valor == 'si') selected @endif>Si</option>
-                                            <option value="no" @if($valor == 'no') selected @endif>No</option>
-                                        </select>
-
-                                    <!-- Para respuesta múltiple -->
-                                    @elseif($var->type == 'p')
-                                        @php
-                                        $answers = unserialize($var->values);
-                                        //dd($answers, $valor);
-                                        @endphp
-
-                                        @if(count($answers) > 0)
-                                            @foreach($answers as $answer)
-                                                @php
-                                                if($answer == $valor){
-                                                    $checked = 'checked';
-                                                    array_push($arrValuesMultiple, $valor);
-                                                }else{
-                                                    $checked = '';
-                                                }
-                                                
-                                                @endphp
-                                                <div class="pt-2 pb-2">
-                                                    <input type="radio" name="valor_{{ $var->id }}" data-indice="{{ $i }}" value="{{ $answer }}" {{ $checked }}> {{ $answer }}
-                                                </div>
-                                            @endforeach
+                                @if($values)
+                                    @foreach($values as $idx => $val)
+                                        @if($idx == $var->id)
+                                            @php
+                                            $valor = $val;
+                                            @endphp    
                                         @endif
+                                    @endforeach
+                                @endif
 
-                                    @else
-                                        <input type="text" class="form-control addVariable" data-indice="{{ $i }}" name="valor_{{ $var->id }}" value="{{ $valor }}">
-                                    @endif
-                                </div>    
-                            </div>  
+                                {{-- dd($var, $identificadorVariables[$var->name], $identificadorValues[$var->name], $valor, $values) --}}
 
-                            @php
-                            $i++;
-                            @endphp  
-                        @endforeach
+                                <input type="hidden" name="variable_{{ $i }}" value="{{ $var->id }}">
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label>{{ $var->name }} <b>({{ $i }})</b></label>
+
+                                        <!-- Para booleano -->
+                                        @if($var->type == 'b')
+                                            <select class="form-control addVariable" data-indice="{{ $i }}" data-tipo="{{ $var->type }}" name="valor_{{ $var->id }}">
+                                                <option value="">Selecciona opción</option>
+                                                <option value="si" @if($valor == 'si') selected @endif>Si</option>
+                                                <option value="no" @if($valor == 'no') selected @endif>No</option>
+                                            </select>
+
+                                        <!-- Para respuesta múltiple -->
+                                        @elseif($var->type == 'p')
+                                            @php
+                                            $answers = unserialize($var->values);
+                                            $textos = unserialize($var->texto);
+
+                                            /*if($textos && count($textos) > 0){
+                                             dd($answers, $textos, $valor);    
+                                            }*/
+                                            @endphp
+
+                                            @if(count($answers) > 0)
+                                                @php
+                                                $j = 0;
+                                                @endphp
+
+                                                @foreach($answers as $answer)
+                                                    @php
+                                                    if($answer == $valor){
+                                                        $checked = 'checked';
+
+                                                        if(!in_array($valor, $arrValuesMultiple)){
+                                                            array_push($arrValuesMultiple, $valor);
+                                                        }
+                                                    }else{
+                                                        $checked = '';
+                                                    }
+                                                    @endphp
+
+                                                    <div class="pt-2 pb-2">
+                                                        <input type="radio" class="addVariable" name="valor_{{ $var->id }}" data-indice="{{ $i }}" data-tipo="{{ $var->type }}" data-texto="{{ $textos[$j] }}" value="{{ $answer }}" {{ $checked }}> {{ $answer }}
+                                                    </div>
+
+                                                    @php
+                                                    $j++;
+                                                    @endphp
+                                                @endforeach
+                                            @endif
+
+                                        @else
+                                            <input type="text" class="form-control addVariable" data-indice="{{ $i }}" data-tipo="{{ $var->type }}" name="valor_{{ $var->id }}" value="{{ $valor }}">
+                                        @endif
+                                    </div>    
+                                </div>  
+
+                                @php
+                                $i++;
+                                @endphp  
+                            @endforeach
+                        @endif
 
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
@@ -113,7 +133,7 @@
                     $i = 0;
                     @endphp
 
-                    {{-- dd($identificadorVariables, $identificadorValues, $matches) --}}
+                    {{-- dd($identificadorVariables, $identificadorValues, $identificadorTextos, $matches) --}}
     
                     {{-- Recorremos las coincidencias y creamos array con su customización: --}}
                     @foreach($matches[0] as $match)
@@ -125,6 +145,11 @@
 
                         if($identificadorValues[$match1]){
                             $partes = unserialize($identificadorValues[$match1]);
+                            $partes_textos = unserialize($identificadorTextos[$match1]);
+
+                            if($match1 == 'preguntita'){
+                                //dd($identificadorValues, $arrValuesMultiple, $partes, $partes_textos, $variables, $matches, $match1);
+                            }
 
                             foreach($partes as $parte){
                                 if(in_array($parte, $arrValuesMultiple)){
@@ -164,8 +189,15 @@ $(document).ready(function(){
     $('.addVariable').on('change', function(){
         var valor = $(this).val();
         var indice = $(this).data('indice');
+        var tipo = $(this).data('tipo');
 
-        $('.variable[data-var="'+indice+'"]').text(valor);
+        if(tipo == 'p'){
+            var texto = $(this).data('texto');
+            $('.variable[data-var="'+indice+'"]').html(texto);
+
+        }else{
+            $('.variable[data-var="'+indice+'"]').text(valor);    
+        }        
     });
 
     $('.addVariable').each(function(){

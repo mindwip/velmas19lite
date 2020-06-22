@@ -1,6 +1,9 @@
 <?php 
 
 return [
+	//EMAIL:
+	'EMAIL_' => 'servicios@velmas19.com',
+
 	//PAYU
 	'ACTION_PAYU_' => 'https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/',	//Sandbox
 	//'ACTION_PAYU_' => 'https://checkout.payulatam.com/ppp-web-gateway-payu/',	//Production

@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -76,12 +77,25 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data){
-            return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'surname' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'state' => 1
         ]);
+
+        //Email:
+        $emailFrom = config('constants.EMAIL_');
+        $emailTo = $user->email;
+        $data['usuario'] = $user;
+
+        Mail::send('emails.welcome', $data, function($message) use($emailFrom, $emailTo){
+            $message->from($emailFrom, 'Velmas19 Lite');
+            $message->to($emailTo);
+            $message->subject('Bienvenido a Velmas19 Lite'); 
+        }); 
+
+        return $user;
     }
 }

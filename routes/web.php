@@ -75,6 +75,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->group
 	Route::get('contracts/{block}/edit-block', 'ContractController@editBlock')->name('contracts.edit-block');
 	Route::post('contracts/update-block', 'ContractController@updateBlock')->name('contracts.update-block');
 	Route::post('contracts/store-variable', 'ContractController@storeVariable')->name('contracts.store-variable');
+	Route::get('contracts/{variable}/{block}/edit-variable', 'ContractController@editVariable')->name('contracts.edit-variable');
+	Route::post('contracts/update-variable', 'ContractController@updateVariable')->name('contracts.update-variable');
 	Route::get('contracts/{variable}/delete-variable', 'ContractController@deleteVariable')->name('contracts.delete-variable');
 
 	//Customers:

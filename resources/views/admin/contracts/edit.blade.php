@@ -59,7 +59,7 @@
 						<div class="form-group row">
 							<label for="description" class="col-lg-2 col-form-label">Descripción:</label>
 							<div class="col-lg-10">
-								<textarea class="form-control" name="description">{{ old('description', $contract->description) }}</textarea>
+								<textarea class="form-control" id="editor" name="description">{{ old('description', $contract->description) }}</textarea>
 							</div>
 						</div>
 					</div>
@@ -144,6 +144,18 @@
 <script src="{{ asset('assets/vendors/general/jquery.repeater/src/jquery.input.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/vendors/general/jquery.repeater/src/repeater.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/js/demo1/pages/crud/forms/widgets/form-repeater.js') }}" type="text/javascript"></script>
+<script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
+
+<script>
+$(document).ready(function(){
+    CKEDITOR.replace( 'editor' );
+    /*CKEDITOR.on('instanceReady', function(){
+    	$('.cke_contents iframe').contents().click(function() {
+        	alert('Clicked!');
+    	});
+	});*/
+});
+</script>
 @endpush
 
 @endsection
